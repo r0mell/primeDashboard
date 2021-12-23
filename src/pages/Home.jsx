@@ -1,17 +1,14 @@
 import React from 'react';
 
-
-
 import Header from '../components/Header';
 import Menu from '../components/Menu';
 import MenuItems from '../constants/consts';
-import MyAccount from './MyAccount';
-import Layout from '../containers/layout';
+import { InputText } from 'primereact/inputtext'
+import ProductList from '../containers/ProductList';
 
 
-import 'primereact/resources/themes/lara-light-indigo/theme.css'
-import 'primereact/resources/primereact.min.css'
-import 'primeicons/primeicons.css'
+
+
 
 /* const [overlayMenuActive, setOverlayMenuActive] = useState(false); */
 
@@ -37,6 +34,16 @@ const Home = () => {
                /* onMenuItemClick={onMenuItemClick}  */ />
          </div>
 
+
+         <div className="layout-main-container">
+            <div className="layout-main">
+               <h1>Nuestros Productos</h1>
+
+               <div className='grid'>
+                  <ProductList />
+               </div>
+            </div>
+         </div>
 
       </div>
    )

@@ -1,60 +1,58 @@
 const MENU = [
    {
-      label: "Products",
+      label: "Productos",
       icon: "pi pi-fw pi-file",
       items: [
          {
-            label: "New",
+            label: "Nuestros Productos",
             icon: "pi pi-fw pi-plus",
             items: [
                {
-                  label: "Bookmark",
+                  label: "Productos Unick",
                   icon: "pi pi-fw pi-bookmark",
-                  to: '/sd'
+                  to: '/home'
                },
                {
-                  label: "Video",
+                  label: "Descubre",
                   icon: "pi pi-fw pi-video",
                },
             ],
          },
          {
-            label: "Delete",
-            icon: "pi pi-fw pi-trash",
+            label: "Editar Producto",
+            icon: "pi pi-fw pi-external-link",
+            to: '/editProduct',
          },
          {
-            label: "Export",
-            icon: "pi pi-fw pi-external-link",
+            label: "Mis Productos",
+            icon: "pi pi-fw pi-trash",
          },
+
       ],
    },
    {
-      label: "Cart",
+      label: "Carrito",
       icon: "pi pi-fw pi-calendar",
       items: [
          {
-            label: "Product",
+            label: "Tus Ordenes",
             icon: "pi pi-fw pi-pencil",
             items: [
                {
-                  label: "Save",
-                  icon: "pi pi-fw pi-calendar-plus",
+                  label: "En Prodceso",
+                  icon: "pi pi-fw pi-prime",
+                  to: '/orders',
                },
                {
-                  label: "Delete",
+                  label: "Completada",
                   icon: "pi pi-fw pi-calendar-minus",
                },
             ],
          },
          {
-            label: "Archieve",
+            label: "Tus Compras",
             icon: "pi pi-fw pi-calendar-times",
-            items: [
-               {
-                  label: "Remove",
-                  icon: "pi pi-fw pi-calendar-minus",
-               },
-            ],
+
          },
       ],
    },
@@ -90,6 +88,7 @@ const MENU = [
          {
             label: "Salir",
             icon: "pi pi-fw pi-user-minus",
+            to: '/'
          },
       ],
    }

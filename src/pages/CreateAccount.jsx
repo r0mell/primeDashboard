@@ -1,34 +1,35 @@
+import { Button } from 'primereact/button'
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { Button } from 'primereact/button';
-import HeaderMain from '../components/HeaderMain';
+import { Link } from 'react-router-dom'
+import HeaderMain from '../components/HeaderMain'
 
-const Login = () => {
+function CreateAccount() {
    return (
       <>
          <HeaderMain />
          <div
             background="/assets/Img/03.jpg"
-            className="img-fluid"
+            class="img-fluid"
             alt="Responsive image"
          >
-            <div className="login-box">
-               <h1>Inicia Sesion</h1>
+            <div class="login-box , logup-box">
+               <h1>Registrate</h1>
 
                <form>
-                  <label >User</label>
+                  <label for="mail">Correo Electronico</label>
+                  <input type="text" placeholder="Ej: name@email.com" />
+
+                  <label for="username">User</label>
                   <input type="text" placeholder="Enter Username" />
 
-                  <label >Password</label>
+                  <label for="password">Password</label>
                   <input type="password" placeholder="Enter Password" />
-                  {/* 
-<div className=''>
-</div> */}
+
+
 
                   <div className="log-access">
 
                      <Button className="p-button-sm" icon="pi pi-check" label="Sing in" ></Button>
-
 
                      <Link to="/loggup">Olvidaste tu contraseña?</Link> <br />
                      <Link to="/loggup">No tienes cuenta? Registrate</Link>
@@ -40,4 +41,4 @@ const Login = () => {
    )
 }
 
-export default Login;
+export default CreateAccount

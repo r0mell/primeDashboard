@@ -1,0 +1,13 @@
+.edit-card {
+	background: var(--surface-e);
+	padding: 2rem;
+	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
+	border-radius: 4px;
+}
+/*contine los estilos del grid para separar los dos contenidos hijos */
+.edit-container {
+	border-top: 1px solid var(--surface-400);
+	padding: 4rem 2rem 2rem 2rem;
+	display: grid;
+	grid-template-columns: 20% auto;
+}

@@ -1,0 +1,13 @@
+.toEdit-container {
+	padding: .5rem 1rem .5rem 1rem;
+	border-bottom: 1px solid var(--surface-400);
+}
+.toEdit-container img {
+	width: 100%;
+	height: 100%;
+	padding-bottom: .5rem;
+}
+.toEdit-info {
+	display: flex;
+	justify-content: center;
+}

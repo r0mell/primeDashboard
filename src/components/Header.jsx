@@ -6,7 +6,7 @@ import logoDark from '../assets/icons/logo-dark.svg'
 function Header(props) {
    return (
       <div className="layout-topbar">
-         <Link to="/" className="layout-topbar-logo">
+         <Link to="/home" className="layout-topbar-logo">
             <img src={logoDark} alt="logo" />
             <span>Unick</span>
          </Link>
