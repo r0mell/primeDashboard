@@ -8,6 +8,12 @@ import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import EditProduct from '../pages/EditProduct';
 import CreateAccount from '../pages/CreateAccount';
+import InitialPage from '../pages/InitialPage';
+import Orders from '../pages/Orders';
+
+import AppContext from '../context/AppContext'
+import useInitialState from '../hooks/useInitialState'
+
 
 import 'primereact/resources/themes/lara-light-indigo/theme.css'
 import 'primereact/resources/primereact.min.css'
@@ -15,16 +21,15 @@ import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css';
 
 import '../styles/layout.scss'
-import InitialPage from '../pages/InitialPage';
-import Orders from '../pages/Orders';
 
 const App = () => {
 
+   const initialState = useInitialState();
 
 
    return (
-      <div>
 
+      <AppContext.Provider >
          <BrowserRouter>
             <Layout>
                <Routes>
@@ -34,7 +39,6 @@ const App = () => {
                   <Route exact path="/logup" element={<CreateAccount />} />
                   <Route exact path="/account" element={<MyAccount />} />
                   <Route exact path="/orders" element={<Orders />} />
-
                   <Route exact path="/editProduct" element={<EditProduct />} />
                   <Route path="*" element={<NotFound />} />
 
@@ -42,7 +46,7 @@ const App = () => {
 
             </Layout>
          </BrowserRouter>
-      </div>
+      </AppContext.Provider>
 
    )
 }

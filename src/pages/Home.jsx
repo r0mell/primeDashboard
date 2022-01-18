@@ -6,10 +6,6 @@ import MenuItems from '../constants/consts';
 import { InputText } from 'primereact/inputtext'
 import ProductList from '../containers/ProductList';
 
-
-
-
-
 /* const [overlayMenuActive, setOverlayMenuActive] = useState(false); */
 
 
@@ -21,7 +17,6 @@ const Home = () => {
             setOverlayMenuActive(false);
          }
       }; */
-
 
 
    return (

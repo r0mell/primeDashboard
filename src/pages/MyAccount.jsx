@@ -35,30 +35,29 @@ const MyAccount = () => {
                         <div className='p-col-12 p-md-6'>
                            <div className='p-d-flex p-flex-column p-ai-center '>
                               <div className='p-mb-2 p-as-center '>
-                                 <label htmlFor="name" /*  className={classNames({ 'p-error': errors.name })} */>Primer Nombre
-                                 </label>
+                                 <label htmlFor="firstName" /*  className={classNames({ 'p-error': errors.name })} */>Primer Nombre</label>
                                  <br />
-                                 <InputText /* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
+                                 <InputText id='firstName'/* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
                               </div>
                               <div className='p-mb-2 p-as-center'>
-                                 <label htmlFor="name"/*  className={classNames({ 'p-error': errors.name })} */>Segundo Nombre</label>
+                                 <label htmlFor="secondName"/*  className={classNames({ 'p-error': errors.name })} */>Segundo Nombre</label>
                                  <br />
-                                 <InputText  /* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
+                                 <InputText id='secondName' /* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
                               </div>
                               <div className='p-mb-2 p-as-center'>
-                                 <label htmlFor="name"/*  className={classNames({ 'p-error': errors.name })} */>Email</label>
+                                 <label htmlFor="email"/*  className={classNames({ 'p-error': errors.name })} */>Email</label>
                                  <br />
-                                 <InputText  /* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
+                                 <InputText id='email' /* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
                               </div>
                               <div className='p-mb-2 p-as-center'>
-                                 <label htmlFor="name"/*  className={classNames({ 'p-error': errors.name })} */>Direccion</label>
+                                 <label htmlFor="address"/*  className={classNames({ 'p-error': errors.name })} */>Direccion</label>
                                  <br />
-                                 <InputText  /* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
+                                 <InputText id='address'  /* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
                               </div>
                               <div className='p-mb-2 p-as-center'>
-                                 <label htmlFor="name"/*  className={classNames({ 'p-error': errors.name })} */>Edad</label>
+                                 <label htmlFor="age"/*  className={classNames({ 'p-error': errors.name })} */>Edad</label>
                                  <br />
-                                 <InputText  /* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
+                                 <InputText id='age'  /* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
                               </div>
                               <Button type="submit" label="Guardar" className="p-mt-2" icon="pi pi-check" />
                            </div>
@@ -72,10 +71,9 @@ const MyAccount = () => {
                                  <FileUpload mode="basic" name="demo[]" accept="image/*" maxFileSize={1000000} />
                               </div>
                               <div className='p-mb-2 p-as-center '>
-                                 <label htmlFor="name" /*  className={classNames({ 'p-error': errors.name })} */>Nick
-                                 </label>
+                                 <label htmlFor="nick" /*  className={classNames({ 'p-error': errors.name })} */>Nick</label>
                                  <br />
-                                 <InputText /* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
+                                 <InputText id='nick'/* className={classNames({ 'p-invalid': fieldState.invalid })}  */ />
                               </div>
                            </div>
                         </div>
