@@ -56,7 +56,7 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
                         <option value="red">Rojo</option>
                      </select>
 
-                     <label htmlFor="size" > <h4>Tamaño</h4></label>
+                     <label htmlFor="size" > <h4>Talla</h4></label>
                      <select name="size" id="size">
                         <option value="XS">XS</option>
                         <option value="S">S</option>
@@ -77,7 +77,7 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
                   <div className='itemDetail-form-'>
                      <img src={itemDetail.images[1]} alt={itemDetail.title} />
 
-                     <h4>Talla de prenda</h4>
+                     <h4>Posición del logo</h4>
 
                      <input type="radio" id='left' name='position' value='left' />
                      <label htmlFor='left'>Izquierda</label>
