@@ -13,11 +13,11 @@ const MENU = [
             icon: "pi pi-fw pi-external-link",
             to: '/editProduct',
          },
-         {
+       /*   {
             label: "Descubre",
             icon: "pi pi-fw pi-external-link",
             to: '/products/discover',
-         },
+         }, */
          {
             label: "Mis Productos",
             icon: "pi pi-fw pi-trash",
