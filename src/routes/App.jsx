@@ -10,6 +10,7 @@ import EditProduct from '../pages/EditProduct';
 import CreateAccount from '../pages/CreateAccount';
 import InitialPage from '../pages/InitialPage';
 import Orders from '../pages/Orders';
+import Logout from '../pages/Logout';
 
 import AppContext from '../context/AppContext'
 import useInitialState from '../hooks/useInitialState'
@@ -21,6 +22,8 @@ import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css';
 
 import '../styles/layout.scss'
+import MyProducts from '../pages/MyProducts';
+import Discover from '../pages/Discover';
 
 const App = () => {
 
@@ -29,7 +32,7 @@ const App = () => {
 
    return (
 
-      <AppContext.Provider >
+      <AppContext.Provider value={initialState} >
          <BrowserRouter>
             <Layout>
                <Routes>
@@ -40,6 +43,9 @@ const App = () => {
                   <Route exact path="/account" element={<MyAccount />} />
                   <Route exact path="/orders" element={<Orders />} />
                   <Route exact path="/editProduct" element={<EditProduct />} />
+                  <Route exact path="/products/myProducts" element={<MyProducts />} />
+                  <Route exact path="/products/discover" element={<Discover />} />
+                  <Route exact path="/logout" element={< Logout />} />
                   <Route path="*" element={<NotFound />} />
 
                </Routes>

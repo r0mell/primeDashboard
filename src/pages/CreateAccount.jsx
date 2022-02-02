@@ -26,7 +26,6 @@ function CreateAccount() {
                   <input type="password" placeholder="Enter Password" />
 
 
-
                   <div className="log-access">
 
                      <Button className="p-button-sm" icon="pi pi-check" label="Sing in" ></Button>

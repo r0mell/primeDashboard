@@ -1,28 +1,45 @@
-import React from 'react'
-import ProductItem from '../components/ProductItem'
-import useProduct from '../hooks/useProduct'
-
-
-const API = 'http://api.escuelajs.co/api/v1/products';
+import React, { useState, useContext } from 'react';
+import ProductItem from '../components/ProductItem';
+import useGetProducts from '../hooks/useGetProducts';
+import AppContext from '../context/AppContext';
 
 
 const ProductList = () => {
 
-  const products = [{ id: 1, title: "rommel" }, { id: 2, title: "rommel" }, { id: 3, title: "rommel" }]
+  const { state, addToEdit } = useContext(AppContext);
+  const [page, setPage] = useState(1);
 
-  const productss = useProduct(API);
+  const products = useGetProducts(page);
+
+
+  const handleAddToCart = product => () => {
+    addToEdit(product)
+  }
+
+  const handlePageIncrement = () => {
+    setPage(page + 1)
+  }
+
+  const handlePageDecrement = () => {
+    setPage(page - 1)
+  }
 
   return (
     <>
       <div className="p-grid">
 
-        {/*   {products.map((product) => (
-               <ProductItem key={product.id} product={product} />
-            ))} */}
-        {productss.map((product) => {
+        {products.map((product) => (
+          <ProductItem
+            key={product.id}
+            product={product}
+            handleAddToCart={handleAddToCart} />
+        ))}
 
-          return <ProductItem key={product.id} product={product} />
-        })}
+      </div>
+
+      <div className='product-paginator'>
+        <button type='button' className='product-paginator-button' onClick={handlePageDecrement} > {`<`} </button>
+        <button type='button' className='product-paginator-button' onClick={handlePageIncrement} > {`>`} </button>
 
       </div>
 

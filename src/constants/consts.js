@@ -4,19 +4,9 @@ const MENU = [
       icon: "pi pi-fw pi-file",
       items: [
          {
-            label: "Nuestros Productos",
-            icon: "pi pi-fw pi-plus",
-            items: [
-               {
-                  label: "Productos Unick",
-                  icon: "pi pi-fw pi-bookmark",
-                  to: '/home'
-               },
-               {
-                  label: "Descubre",
-                  icon: "pi pi-fw pi-video",
-               },
-            ],
+            label: "Productos Unick",
+            icon: "pi pi-fw pi-bookmark",
+            to: '/home',
          },
          {
             label: "Editar Producto",
@@ -24,10 +14,15 @@ const MENU = [
             to: '/editProduct',
          },
          {
+            label: "Descubre",
+            icon: "pi pi-fw pi-external-link",
+            to: '/products/discover',
+         },
+         {
             label: "Mis Productos",
             icon: "pi pi-fw pi-trash",
+            to: '/products/myProducts',
          },
-
       ],
    },
    {
@@ -35,25 +30,42 @@ const MENU = [
       icon: "pi pi-fw pi-calendar",
       items: [
          {
-            label: "Tus Ordenes",
+            label: "Tu Orden",
             icon: "pi pi-fw pi-pencil",
-            items: [
-               {
-                  label: "En Prodceso",
-                  icon: "pi pi-fw pi-prime",
-                  to: '/orders',
-               },
-               {
-                  label: "Completada",
-                  icon: "pi pi-fw pi-calendar-minus",
-               },
-            ],
+            to: '/orders',
+
+         },
+         {
+            label: "Pagos",
+            icon: "pi pi-fw pi-prime",
+
          },
          {
             label: "Tus Compras",
             icon: "pi pi-fw pi-calendar-times",
+         },
+
+      ],
+   },
+   {
+      label: "Admin",
+      icon: "pi pi-fw pi-calendar",
+      items: [
+         {
+            label: "Crear producto",
+            icon: "pi pi-fw pi-pencil",
 
          },
+         {
+            label: "Clientes",
+            icon: "pi pi-fw pi-prime",
+            to: '/orders',
+         },
+         {
+            label: "Ordenes",
+            icon: "pi pi-fw pi-calendar-times",
+         },
+
       ],
    },
    {
@@ -66,29 +78,9 @@ const MENU = [
             to: "/account"
          },
          {
-            label: "Search",
-            icon: "pi pi-fw pi-users",
-            items: [
-               {
-                  label: "Filter",
-                  icon: "pi pi-fw pi-filter",
-                  items: [
-                     {
-                        label: "Print",
-                        icon: "pi pi-fw pi-print",
-                     },
-                  ],
-               },
-               {
-                  icon: "pi pi-fw pi-bars",
-                  label: "List",
-               },
-            ],
-         },
-         {
             label: "Salir",
             icon: "pi pi-fw pi-user-minus",
-            to: '/'
+            to: '/logout'
          },
       ],
    }

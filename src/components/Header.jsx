@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import AppContext from '../context/AppContext';
+
 import logoDark from '../assets/icons/logo-dark.svg'
 
 
+
+
 function Header(props) {
+
+   const { state } = useContext(AppContext);
+   const { toEdit } = state;
    return (
       <div className="layout-topbar">
          <Link to="/home" className="layout-topbar-logo">
@@ -25,7 +32,9 @@ function Header(props) {
             <li>
                <button className="p-link layout-topbar-button" onClick={props.onMobileSubTopbarMenuClick}>
                   <i className="pi pi-cog" />
-                  <span>Settings</span>
+                  {
+                     toEdit.length > 0 && <p>{toEdit.length}</p>
+                  }
                </button>
             </li>
             <li>
