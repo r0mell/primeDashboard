@@ -5,7 +5,8 @@ export default {
    direccion.....
    
    */
-   toEdit:[],
-   myProducts: [],
+   createdBy: 'r0mell',
+   toEdit: [],
+   myProducts: [],//{a:'',b:, c:[]}
    cart: [],
 }

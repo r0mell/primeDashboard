@@ -1,19 +1,20 @@
 import React, { useContext, useRef, useState } from 'react';
-import AppContext from '../context/AppContext';
 
-import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
+
+import AppContext from '../context/AppContext';
 
 
 const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
-   const { state, addMyProducts } = useContext(AppContext);
-   const { myProducts } = state;
+   const { state, addMyProducts, removeToEdit } = useContext(AppContext);
+   const { createdBy } = state;
    const [proyectName, setProyectName] = useState('camiseta');
 
    const form = useRef(null);
 
-   const handleSubmit = () => {
+   const handleSubmit = (item) => () => {
+
       const formData = new FormData(form.current);
 
       const product = {
@@ -25,11 +26,15 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
          'stampingType': formData.get('stampingType'),
          'price': formData.get('price'),
       }
-      /* console.log(product); */
-      addMyProducts(product)
-      console.log(myProducts);
+
+      const newProyect = { ...item, ...product, createdBy }
+      addMyProducts(newProyect);
+      console.log('JSON:' + newProyect);
+      /*Aqui esxiste un errror debido a que se tendria que eliminar solo   */
 
    }
+
+
    return (
       <div className='itemDetail-container'>
 
@@ -110,7 +115,7 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
          <div className='itemDetail-footer'>
             <Button label="Cancelar" icon="pi pi-times" className="p-button-text p-button-sm" onClick={handleCanceLoadItem(null)} />
-            <Button label="Guardar" icon="pi pi-check" className="p-button-text p-button-sm" onClick={handleSubmit} />
+            <Button label="Guardar" icon="pi pi-check" className="p-button-text p-button-sm" onClick={handleSubmit(itemDetail)} />
 
          </div>
 

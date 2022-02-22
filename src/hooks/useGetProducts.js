@@ -3,7 +3,9 @@ import axios from 'axios';
 
 const useGetProducts = (page) => {
 
-  const API = `http://localhost:3001/api/v1/products?page=${page}&limit=3`;
+  const API = `http://localhost:3001/api/v1/products/paginator?page=${page}&limit=3`;
+
+
 
 
   const [products, setProducts] = useState([])

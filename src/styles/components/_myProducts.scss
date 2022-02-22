@@ -1,0 +1,66 @@
+.myProduct-card {
+   background: var(--surface-e);
+   padding: 1rem 2rem 1rem 2rem;
+   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.02), 0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 4px rgba(0, 0, 0, 0.08);
+   border-radius: 4px;
+}
+/*contine los estilos del grid para separar los dos contenidos hijos */
+.myProduct-container {
+   /* border-top: 1px solid var(--surface-400); */
+   padding: 2rem 1rem 1rem 1rem;
+   display: grid;
+   grid-template-columns: auto auto auto auto;
+   text-align: center;
+   gap: 1rem;
+}
+
+.myProduct-grid-item {
+   text-align: center;
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+   padding: 1rem;
+
+   img {
+      width: 70%;
+   }
+   h3 {
+      margin: 0rem 0rem 1rem 0rem;
+   }
+   p {
+      margin: 0.7rem 0;
+      span {
+         color: #ffff;
+         /* border: 1px solid var(--surface-400); */
+         background: var(--text-color);
+         border-radius: 12px;
+         padding: 0.2rem 1rem;
+      }
+      span:hover {
+         color: var(--text-color);
+         border: 1px solid var(--surface-400);
+         background: #fff;
+         border-radius: 12px;
+         padding: 0.2rem 1rem;
+      }
+   }
+   /*  span {
+      margin: 0.7rem 0;
+   } */
+   button {
+      margin: 0;
+      padding: 0.6rem 0.6rem;
+      font-family: var(--font-family);
+      color: aliceblue;
+      border-radius: 6px;
+      border: 0;
+      background: #081e2f;
+   }
+   button:hover {
+      margin: 0;
+      padding: 0.6rem 0.6rem;
+      font-family: var(--font-family);
+      color: #081e2f;
+      border-radius: 6px;
+      border: 0;
+      background: #39cdfc;
+   }
+}

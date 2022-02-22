@@ -24,6 +24,10 @@ import 'primeflex/primeflex.css';
 import '../styles/layout.scss'
 import MyProducts from '../pages/MyProducts';
 import Discover from '../pages/Discover';
+import OrdesAdministrator from '../pages/OrdesAdministrator';
+import ClientsAdministrator from '../pages/ClientsAdministrator';
+import CheckPay from '../pages/CheckPay';
+import ProductAdministrator from '../pages/ProductsAdministrator';
 
 const App = () => {
 
@@ -37,14 +41,18 @@ const App = () => {
             <Layout>
                <Routes>
                   <Route exact path="/" element={<InitialPage />} />
-                  <Route exact path="/home" element={<Home />} />
+                  <Route exact path="/product/products" element={<Home />} />
                   <Route exact path="/login" element={<Login />} />
                   <Route exact path="/logup" element={<CreateAccount />} />
                   <Route exact path="/account" element={<MyAccount />} />
-                  <Route exact path="/orders" element={<Orders />} />
-                  <Route exact path="/editProduct" element={<EditProduct />} />
+                  <Route exact path="/orders/order" element={<Orders />} />
+                  <Route exact path="/product/editProduct" element={<EditProduct />} />
                   <Route exact path="/products/myProducts" element={<MyProducts />} />
                   <Route exact path="/products/discover" element={<Discover />} />
+                  <Route exact path="/admin/checkout" element={< OrdesAdministrator />} />
+                  <Route exact path="/admin/clients" element={< ClientsAdministrator />} />
+                  <Route exact path="/admin/products" element={< ProductAdministrator />} />
+                  <Route exact path="/orders/checkpay" element={< CheckPay />} />
                   <Route exact path="/logout" element={< Logout />} />
                   <Route path="*" element={<NotFound />} />
 

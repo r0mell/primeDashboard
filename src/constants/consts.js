@@ -6,18 +6,18 @@ const MENU = [
          {
             label: "Productos Unick",
             icon: "pi pi-fw pi-bookmark",
-            to: '/home',
+            to: '/product/products',
          },
          {
             label: "Editar Producto",
             icon: "pi pi-fw pi-external-link",
-            to: '/editProduct',
+            to: '/product/editProduct',
          },
-       /*   {
-            label: "Descubre",
-            icon: "pi pi-fw pi-external-link",
-            to: '/products/discover',
-         }, */
+         /*   {
+              label: "Descubre",
+              icon: "pi pi-fw pi-external-link",
+              to: '/products/discover',
+           }, */
          {
             label: "Mis Productos",
             icon: "pi pi-fw pi-trash",
@@ -32,17 +32,19 @@ const MENU = [
          {
             label: "Tu Orden",
             icon: "pi pi-fw pi-pencil",
-            to: '/orders',
+            to: '/orders/order',
 
          },
          {
             label: "Pagos",
             icon: "pi pi-fw pi-prime",
+            to: '/orders/checkpay',
 
          },
          {
             label: "Tus Compras",
             icon: "pi pi-fw pi-calendar-times",
+            to: '/orders/payloads',
          },
 
       ],
@@ -54,16 +56,18 @@ const MENU = [
          {
             label: "Crear producto",
             icon: "pi pi-fw pi-pencil",
+            to: '/admin/products',
 
          },
          {
             label: "Clientes",
             icon: "pi pi-fw pi-prime",
-            to: '/orders',
+            to: '/admin/clients',
          },
          {
             label: "Ordenes",
             icon: "pi pi-fw pi-calendar-times",
+            to: '/admin/checkout',
          },
 
       ],
