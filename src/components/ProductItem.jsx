@@ -2,7 +2,8 @@ import React from 'react'
 
 import { Button } from 'primereact/button';
 
-const ProductItem = ({ product, handleAddToCart }) => {
+//const ProductItem = ({ product, handleAddToCart }) => {
+const ProductItem = ({ product }) => {
 
   return (
     <div className="p-col-12 p-md-4 p-lg-4">
@@ -30,7 +31,7 @@ const ProductItem = ({ product, handleAddToCart }) => {
             className="p-button-sm"
             icon="pi pi-shopping-cart"
             label="Editar"
-            onClick={handleAddToCart(product)}
+          // onClick={handleAddToCart(product)}
           />
         </div>
 

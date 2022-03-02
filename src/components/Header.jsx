@@ -9,8 +9,8 @@ import logoDark from '../assets/icons/logo-dark.svg'
 
 function Header(props) {
 
-   const { state } = useContext(AppContext);
-   const { toEdit } = state;
+   //const { state } = useContext(AppContext);
+   //const { toEdit } = state;
    return (
       <div className="layout-topbar">
          <Link to="/home" className="layout-topbar-logo">
@@ -33,7 +33,7 @@ function Header(props) {
                <button className="p-link layout-topbar-button" onClick={props.onMobileSubTopbarMenuClick}>
                   <i className="pi pi-cog" />
                   {
-                     toEdit.length > 0 && <p>{toEdit.length}</p>
+                     //toEdit.length > 0 && <p>{toEdit.length}</p>
                   }
                </button>
             </li>

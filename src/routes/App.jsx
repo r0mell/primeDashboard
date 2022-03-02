@@ -29,14 +29,13 @@ import ClientsAdministrator from '../pages/ClientsAdministrator';
 import CheckPay from '../pages/CheckPay';
 import ProductAdministrator from '../pages/ProductsAdministrator';
 
+import AppState from '../context/AppState'
+
 const App = () => {
-
-   const initialState = useInitialState();
-
 
    return (
 
-      <AppContext.Provider value={initialState} >
+      <AppState >
          <BrowserRouter>
             <Layout>
                <Routes>
@@ -60,7 +59,7 @@ const App = () => {
 
             </Layout>
          </BrowserRouter>
-      </AppContext.Provider>
+      </AppState>
 
    )
 }

@@ -1,12 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
+import AppContext from '../context/AppContext';
+
+const useGetProducts = (page) => {
+
+  const { getProducts } = useContext(AppContext);
+
+  useEffect(() => {
+
+    getProducts(page)
+
+  }, [page])
+
+}
+
+export default useGetProducts;
+
+
+
+
+
+
+/*import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const useGetProducts = (page) => {
 
   const API = `http://localhost:3001/api/v1/products/paginator?page=${page}&limit=3`;
-
-
-
 
   const [products, setProducts] = useState([])
 
@@ -22,17 +41,4 @@ const useGetProducts = (page) => {
 
 export default useGetProducts;
 
-
-
-/* const useGetProducts = (page) => {
-
-  return axios.get(`http://localhost:3001/api/v1/products?page=${page}&limit=3`)
-    .then(res => {
-      const products = res.data.results
-      return products;
-    })
-    .catch((e) => console.log(e))
-
-}
-
-export default useGetProducts; */
+*/

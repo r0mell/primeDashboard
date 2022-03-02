@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ProductItem from '../components/ProductItem';
 import useGetProducts from '../hooks/useGetProducts';
 import AppContext from '../context/AppContext';
@@ -6,15 +6,15 @@ import AppContext from '../context/AppContext';
 
 const ProductList = () => {
 
-  const { state, addToEdit } = useContext(AppContext);
+  const { products } = useContext(AppContext);
   const [page, setPage] = useState(1);
 
-  const products = useGetProducts(page);
+  useGetProducts(page)
 
 
-  const handleAddToCart = product => () => {
-    addToEdit(product)
-  }
+  /* const handleAddToCart = product => () => {
+     addToEdit(product)
+   }*/
 
   const handlePageIncrement = () => {
     setPage(page + 1)
@@ -32,7 +32,8 @@ const ProductList = () => {
           <ProductItem
             key={product.id}
             product={product}
-            handleAddToCart={handleAddToCart} />
+          //handleAddToCart={handleAddToCart} 
+          />
         ))}
 
       </div>

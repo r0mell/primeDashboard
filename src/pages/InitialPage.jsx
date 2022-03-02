@@ -1,9 +1,11 @@
 import React from 'react';
 
-/* import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import { Button } from "primereact/button";
- */
+
 import ButtonLogin from '../components/ButtonLogin';
+
+import Login from '../pages/Login';
 import HeaderMain from '../components/HeaderMain';
 import TimeLine from '../components/TimeLine';
 
@@ -19,7 +21,11 @@ const InitialPage = () => {
                      <div className='initial-presentation'>
                         <h1>Bienvenido a Unick</h1>
                         <p>Esta es una demostracion de lo que podemos presentar</p>
-                        <ButtonLogin />                
+                        {/* <ButtonLogin /> */}
+                        {/* <Login /> */}
+                        <Link to='/login'><Button>Comencemos</Button></Link>
+
+
                      </div>
                   </div>
                   <div className='p-md-7 p-col-12'>
