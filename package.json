@@ -16,6 +16,7 @@
 		"@material-table/core": "^4.3.29",
 		"axios": "^0.24.0",
 		"classnames": "^2.3.1",
+		"formik": "^2.2.9",
 		"primeflex": "^2.0.0",
 		"primeicons": "^5.0.0",
 		"primereact": "^7.0.1",

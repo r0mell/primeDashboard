@@ -1,6 +1,7 @@
 import React from 'react';
 
 const MyProduct = ({ myProduct, handleAddToCart }) => {
+   
    return (
 
       <div className='myProduct-grid-item'>

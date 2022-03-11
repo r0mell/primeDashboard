@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Button } from "primereact/button";
-//import { useAuth0 } from '@auth0/auth0-react'
+import AppContext from '../context/AppContext';
 
 const ButtonLogout = () => {
-   // const { logout } = useAuth0();
+
+
+   const { logout } = useContext(AppContext)
+
+
    return (
       <>
-         <Button
-            label="Salir"
-            className="p-button-secondary"
-         //onClick={() => logout({ returnTo: window.location.origin })} 
 
-         />
+
+         <Link to='/'>
+            <Button onClick={logout} className="p-button-secondary">Salir</Button>
+         </Link>
+
+
       </>
    )
 }

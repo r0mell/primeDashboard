@@ -7,11 +7,12 @@ import AppContext from '../context/AppContext';
 
 const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
-   const { state, addMyProducts, removeToEdit } = useContext(AppContext);
-   const { createdBy } = state;
+   const { createdBy, addMyProducts } = useContext(AppContext);
+
    const [proyectName, setProyectName] = useState('camiseta');
 
    const form = useRef(null);
+
 
    const handleSubmit = (item) => () => {
 

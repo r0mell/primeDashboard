@@ -6,15 +6,15 @@ import AppContext from '../context/AppContext';
 
 const ProductList = () => {
 
-  const { products } = useContext(AppContext);
+  const { products, addToEdit } = useContext(AppContext);
   const [page, setPage] = useState(1);
 
   useGetProducts(page)
 
 
-  /* const handleAddToCart = product => () => {
-     addToEdit(product)
-   }*/
+  const handleAddToCart = product => () => {
+    addToEdit(product)
+  }
 
   const handlePageIncrement = () => {
     setPage(page + 1)
@@ -32,7 +32,7 @@ const ProductList = () => {
           <ProductItem
             key={product.id}
             product={product}
-          //handleAddToCart={handleAddToCart} 
+          handleAddToCart={handleAddToCart} 
           />
         ))}
 

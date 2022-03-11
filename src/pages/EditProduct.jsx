@@ -9,8 +9,8 @@ import ItemToEdit from '../components/ItemToEdit';
 
 const EditProduct = () => {
 
-   const { state, removeToEdit } = useContext(AppContext);
-   const { toEdit } = state;
+   const { toEdit, removeToEdit } = useContext(AppContext);
+   //const { toEdit } = state;
 
    const [page, setPage] = useState(1);
    const [limitToEdit, setLimitToEdit] = useState([]);
@@ -44,7 +44,7 @@ const EditProduct = () => {
       setLoadItem(product)
    }
 
-   const handleCanceLoadItem = product => () =>{
+   const handleCanceLoadItem = product => () => {
       setLoadItem(product)
    }
 
@@ -82,7 +82,7 @@ const EditProduct = () => {
                      <div className='edit-toEdit'>
                         {
                            loadItem
-                              ? <ItemDetail itemDetail={loadItem} handleCanceLoadItem={handleCanceLoadItem}/>
+                              ? <ItemDetail itemDetail={loadItem} handleCanceLoadItem={handleCanceLoadItem} />
                               : <p>Elige un item para editarlo</p>
                         }
                      </div>

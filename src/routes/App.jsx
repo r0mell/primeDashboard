@@ -12,15 +12,6 @@ import InitialPage from '../pages/InitialPage';
 import Orders from '../pages/Orders';
 import Logout from '../pages/Logout';
 
-import AppContext from '../context/AppContext'
-import useInitialState from '../hooks/useInitialState'
-
-
-import 'primereact/resources/themes/lara-light-indigo/theme.css'
-import 'primereact/resources/primereact.min.css'
-import 'primeicons/primeicons.css'
-import 'primeflex/primeflex.css';
-
 import '../styles/layout.scss'
 import MyProducts from '../pages/MyProducts';
 import Discover from '../pages/Discover';
@@ -30,6 +21,11 @@ import CheckPay from '../pages/CheckPay';
 import ProductAdministrator from '../pages/ProductsAdministrator';
 
 import AppState from '../context/AppState'
+
+import 'primereact/resources/themes/lara-light-indigo/theme.css'
+import 'primereact/resources/primereact.min.css'
+import 'primeicons/primeicons.css'
+import 'primeflex/primeflex.css';
 
 const App = () => {
 

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
@@ -11,68 +12,115 @@ const Login = () => {
    const navigate = useNavigate()
 
    const { getToken } = useContext(AppContext)
+   const [validate, setValidate] = useState(false)
 
-   const [userName, setUserName] = useState('')
-   const [password, setPassword] = useState('')
+   const sunmitFuction = async (valores, resetForm) => {
+
+      let tokenAux = await getToken(valores)
+
+      console.log(tokenAux);
+      console.log('formulario enviado');
+
+      setValidate(true)
+      resetForm()
+
+      setTimeout(() => {
+         setValidate(false)
+         console.log('procesando informacion ');
+      }, 2000);
 
 
-   const handleLogin = async (event) => {
-      event.preventDefault()
+      setTimeout(() => {
+         navigate('/product/products')
+      }, 2000)
 
-      const tokenAux = await getToken({
-         firstName: userName,
-         password
-      })
-
-      setUserName('')
-      setPassword('')
-
-      tokenAux
-         ? navigate('/product/products')
-         : console.log("usuio no valido")
    }
 
    return (
       <>
          <HeaderMain />
-         <div
-            background="/assets/Img/03.jpg"
-            className="img-fluid"
-            alt="Responsive image"
-         >
-            <div className="login-box">
-               <h1>Inicia Sesion</h1>
 
-               <form onSubmit={handleLogin}>
-                  <label >User</label>
+         <div className="login-box">
+            <h1>Inicia Sesion</h1>
 
-                  <input
-                     type="text"
-                     name='UserName'
-                     placeholder="Enter Username"
-                     value={userName}
-                     onChange={({ target }) => setUserName(target.value)}
-                  />
 
-                  <label >Password</label>
+            <Formik
 
-                  <input
-                     type="password"
-                     name='Password'
-                     placeholder="Enter Password"
-                     value={password}
-                     onChange={({ target }) => setPassword(target.value)}
-                  />
+               initialValues={{
+                  email: '',
+                  userPassword: ''
 
-                  <div className="log-access">
+               }}
 
-                     <Button className="p-button-sm" icon="pi pi-check" label="Sing in" ></Button>
+               validate={(valores) => {
+                  let errors = {}
 
-                     <Link to="/loggup">Olvidaste tu contraseña?</Link> <br />
-                     <Link to="/loggup">No tienes cuenta? Registrate</Link>
-                  </div>
-               </form>
-            </div>
+                  //validacion correo
+                  if (!valores.email) {
+                     errors.email = 'Correo requerido'
+                  } else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.email)) {
+                     errors.email = 'Correo sin formato'
+                  }
+
+                  //validacion pasword
+                  if (!valores.userPassword) {
+                     errors.userPassword = 'Contraseña requerida'
+                  } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/.test(valores.userPassword)) {
+                     errors.userPassword = 'Contraseña invalida al menos [A, a, *, 0-9]'
+                  }
+
+
+                  return errors
+               }}
+
+               onSubmit={async (valores, { resetForm }) => {
+                  sunmitFuction(valores, resetForm)
+
+               }}
+
+
+            >
+
+               {({ errors }) => (
+
+                  <Form>
+                     <label htmlFor="email">Correo Electrónico</label>
+                     <Field
+                        type="text"
+                        id='email'
+                        name='email'
+                        placeholder="Ej: name@email.com"
+                     />
+
+                     <ErrorMessage name='email' component={() => (
+                        <div className='account-error'>{errors.email}</div>
+                     )} />
+
+
+                     <label htmlFor="userPassword">Contraseña</label>
+                     <Field
+                        type="password"
+                        id='userPassword'
+                        name='userPassword'
+                        placeholder="Ej: P@ssw0rd"
+                     />
+
+                     <ErrorMessage name='userPassword' component={() => (
+                        <div className='account-error'>{errors.userPassword}</div>
+                     )} />
+
+
+                     <div className="log-access">
+
+                        <Button icon="pi pi-check" >Registrate</Button>
+
+                        <Link to="/loggup">Olvidaste tu contraseña?</Link> <br />
+                        <Link to="/loggup">No tienes cuenta? Registrate</Link>
+                     </div>
+                  </Form>
+               )}
+            </Formik>
+
          </div>
       </>
    )

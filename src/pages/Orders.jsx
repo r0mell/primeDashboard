@@ -6,8 +6,8 @@ import AppContext from '../context/AppContext';
 
 const Orders = () => {
 
-   const { state, removeToCart } = useContext(AppContext);
-   const { cart } = state;
+   const { cart, removeToCart } = useContext(AppContext);
+
 
    const handleRemoveToCart = item => () => {
       removeToCart(item)
