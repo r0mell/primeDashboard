@@ -1,40 +1,138 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
 
 import { Button } from 'primereact/button';
-
 import AppContext from '../context/AppContext';
+import Carousel from '../containers/Carousel';
 
+import images from '../constants/imagesCarousel'
+
+import atom from '../assets/img/atom.png'
+
+const PruebaTest = ({ item }) => {
+
+   const { values } = useFormikContext()
+   const [coordLogo, setCoordLogo] = useState({ x: 0, y: 0 })
+   const [indexImage, setIndexImage] = useState(0)
+
+   //funcion que obtine los valores de x,y y los setea para permitir la traslacion de la imagen 
+   const positionLogo = (position) => {
+
+      let top
+      let left
+      let positionElemet
+
+      if (position == null) {
+         return positionElemet = {
+            display: "block"
+         }
+      }
+      if (position == 'center') {
+         top = "25%"
+         left = "45%"
+      }
+      if (position == 'left') {
+         top = "29%";
+         left = "33%";
+      }
+      if (position == 'right') {
+         top = "29%"
+         left = "58%"
+      }
+
+      positionElemet = {
+         width: "10%",
+         height: "auto",
+         top: `${top}`,
+         left: `${left}`
+      }
+
+      return positionElemet
+   }
+
+   const getIndexCarousel = imageGallery => () => {
+      setIndexImage(imageGallery.getCurrentIndex())
+   }
+
+   const changeImage = (color) => {
+      if (color == 'black') {
+         return item.images[1]
+      }
+      if (color == 'red') {
+         return item.images[2]
+      }
+      if (color == 'white') {
+         return item.images[0]
+      }
+   }
+
+   return (
+      <>
+         <div className='itemDetail-images-first' >
+            <img
+               className='itemDetail-images-template'
+               src={changeImage(values.color) || item.images[0]}
+               alt={values.color}
+            />
+
+            <img
+               className='itemDetail-images-logo'
+               style={positionLogo(values.position)}
+               src={images[indexImage].original}
+               alt={values.color}
+            />
+
+         </div>
+
+         <div className='itemDetail-images-second'>
+            <Carousel
+               getIndexCarousel={getIndexCarousel}
+            />
+         </div>
+
+      </>
+   )
+}
 
 const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
    const { createdBy, addMyProducts } = useContext(AppContext);
 
-   const [proyectName, setProyectName] = useState('camiseta');
+   //const [priceProduct, setPriceProduct] = useState(itemDetail.price)
 
-   const form = useRef(null);
+   const calculatePrice = (stampingType) => {
 
+      if (stampingType == 'bordado') {
 
-   const handleSubmit = (item) => () => {
-
-      const formData = new FormData(form.current);
-
-      const product = {
-         'proyectName': formData.get('proyectName'),
-         'color': formData.get('color'),
-         'size': formData.get('size'),
-         'neckType': formData.get('neckType'),
-         'position': formData.get('position'),
-         'stampingType': formData.get('stampingType'),
-         'price': formData.get('price'),
+         //setPriceProduct(itemDetail.price + 5)
+         return itemDetail.price + 5
       }
 
-      const newProyect = { ...item, ...product, createdBy }
-      addMyProducts(newProyect);
-      console.log('JSON:' + newProyect);
-      /*Aqui esxiste un errror debido a que se tendria que eliminar solo   */
+      if (stampingType == 'estampado') {
 
+         //setPriceProduct(itemDetail.price + 2.50)
+         return itemDetail.price + 2.50
+      }
    }
 
+   const changeImage = (color) => {
+      if (color == 'black') {
+         return itemDetail.images[0]
+      }
+      if (color == 'red') {
+         return itemDetail.images[1]
+      }
+      if (color == 'white') {
+         return itemDetail.images[2]
+      }
+   }
+
+   const createMyProduct = (valores, resetForm) => {
+
+      addMyProducts(itemDetail, valores)
+      resetForm()
+
+   }
 
    return (
       <div className='itemDetail-container'>
@@ -45,81 +143,129 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
          <div className='itemDetail-form'>
 
-            <form ref={form} >
-               <div className='itemDetail-form-grid'>
 
-                  <div className='itemDetail-form-grid-first'>
+            <Formik
 
-                     <img src={itemDetail.images[1]} alt={itemDetail.title} />
-
-                     <label htmlFor="proyectName" ><h4>Nombre</h4> </label>
-                     <input name='proyectName' id='proyectName' placeholder={proyectName} />
-
-                     <label htmlFor="color"> <h4>Escoje el color:</h4></label>
-                     <select name="color" id="color">
-                        <option value="white">Blanco</option>
-                        <option value="black">Negro</option>
-                        <option value="red">Rojo</option>
-                     </select>
-
-                     <label htmlFor="size" > <h4>Talla</h4></label>
-                     <select name="size" id="size">
-                        <option value="XS">XS</option>
-                        <option value="S">S</option>
-                        <option value="XM">XM</option>
-                        <option value="M">M</option>
-                        <option value="XL">XL</option>
-                        <option value="L">L</option>
-                     </select>
-
-                     <label htmlFor="neckType" > <h4>Tipo de cuello</h4></label>
-                     <select name="neckType" id="neckType">
-                        <option value="round">Redondo</option>
-                        <option value="tipeV">Tipo V</option>
-                     </select>
-
-                  </div>
-
-                  <div className='itemDetail-form-'>
-                     <img src={itemDetail.images[1]} alt={itemDetail.title} />
-
-                     <h4>Posición del logo</h4>
-
-                     <input type="radio" id='left' name='position' value='left' />
-                     <label htmlFor='left'>Izquierda</label>
-
-                     <input type="radio" id='center' name='position' value='center' />
-                     <label htmlFor='center'>Centro</label>
-
-                     <input type="radio" id='right' name='position' value='right' />
-                     <label htmlFor='right'>Derecho</label>
+               initialValues={{
+                  proyectName: '',
+                  color: '',
+                  size: '',
+                  neckType: '',
+                  position: null,
+                  stampingType: ''
 
 
-                     <h4>Tipo de estampado</h4>
+               }}
 
-                     <input type="radio" id='bordado' name='stampingType' value='bordado' />
-                     <label htmlFor='bordado'>Bordado</label>
+               validate={(valores) => {
 
-                     <input type="radio" id='estampado' name='stampingType' value='estampado' />
-                     <label htmlFor='estampado'>Estampado</label>
 
-                     <h4>Precio</h4>
-                     <p>$ {itemDetail.price + 5}</p>
 
-                  </div>
+               }}
 
-               </div>
+               onSubmit={(valores, { resetForm }) => {
 
-            </form>
+                  createMyProduct(valores, resetForm)
+
+                  //console.log(valores);
+
+               }}
+
+
+            >
+               {({ errors, values }) => (
+
+                  <Form>
+
+                     <div className='itemDetail-images-grid'>
+
+                        <PruebaTest item={itemDetail} />
+
+                     </div>
+
+                     <div className='itemDetail-form-grid'>
+
+                        <div className='itemDetail-form-grid-first'>
+
+                           <label htmlFor="proyectName" ><h4>Nombre</h4></label>
+                           <Field
+                              type="text"
+                              id='proyectName'
+                              name='proyectName'
+                              placeholder='Ej: Proyecto1'
+                           />
+
+                           <label htmlFor="color"> <h4>Escoje el color</h4></label>
+                           <Field name="color" as='select'>
+                              <option value="white">Blanco</option>
+                              <option value="black">Negro</option>
+                              <option value="red">Rojo</option>
+                           </Field>
+
+
+                           <label htmlFor="size" > <h4>Talla</h4></label>
+                           <Field name="size" as='select'>
+                              <option value="XS">XS</option>
+                              <option value="S">S</option>
+                              <option value="XM">XM</option>
+                              <option value="M">M</option>
+                              <option value="XL">XL</option>
+                              <option value="L">L</option>
+                           </Field>
+
+                           <label htmlFor="neckType" > <h4>Tipo de cuello</h4></label>
+                           <Field name="neckType" as='select'>
+                              <option value="round">Redondo</option>
+                              <option value="tipeV">Tipo V</option>
+                           </Field>
+
+                        </div>
+
+                        <div className='itemDetail-form-'>
+                           {/*     <img src={itemDetail.images[1]} alt={itemDetail.title} /> */}
+
+                           <h4>Posición del logo</h4>
+
+                           <label >
+                              <Field type="radio" name='position' value='left' /> Izquierda
+                           </label>
+                           <label >
+                              <Field type="radio" name='position' value='center' /> Centro
+                           </label>
+                           <label >
+                              <Field type="radio" name='position' value='right' /> Derecho
+                           </label>
+
+
+                           <h4>Tipo de estampado</h4>
+
+                           <label >
+                              <Field type="radio" name='stampingType' value='bordado' /> Bordado
+                           </label>
+                           <label >
+                              <Field type="radio" name='stampingType' value='estampado' /> Estampado
+                           </label>
+
+                           <h4>Precio</h4>
+                           {/* <p>$ {itemDetail.price + 5}</p> */}
+                           <p>$ {calculatePrice(values.stampingType) || itemDetail.price}</p>
+
+                        </div>
+
+                     </div>
+
+
+
+                     <div className='itemDetail-footer'>
+                        <Button label="Cancelar" icon="pi pi-times" className="p-button-text p-button-sm" onClick={handleCanceLoadItem} />
+                        <Button label="Guardar" icon="pi pi-check" className="p-button-text p-button-sm" />
+
+                     </div>
+                  </Form>
+               )}
+            </Formik>
 
          </div>
-
-         <div className='itemDetail-footer'>
-            <Button label="Cancelar" icon="pi pi-times" className="p-button-text p-button-sm" onClick={handleCanceLoadItem(null)} />
-            <Button label="Guardar" icon="pi pi-check" className="p-button-text p-button-sm" onClick={handleSubmit(itemDetail)} />
-
-         </div>
-
       </div>
    )
 }

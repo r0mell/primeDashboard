@@ -73,7 +73,7 @@ export default (state, action) => {
 
          return {
             ...state,
-            toEdit: state.toEdit.filter(items => items.id !== payload.id)
+            toEdit: state.toEdit.filter(items => items.auxId !== payload.auxId)
 
          }
 
@@ -94,7 +94,7 @@ export default (state, action) => {
 
          return {
             ...state,
-            cart: state.cart.filter(items => items.id !== payload.id)
+            cart: state.cart.filter(items => items.auxId !== payload.auxId)
 
          }
 

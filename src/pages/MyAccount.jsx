@@ -10,8 +10,6 @@ import Menu from '../components/Menu'
 
 import { Button } from 'primereact/button';
 
-import Perfil from '../assets/img/rommel.jpg';
-
 
 const MyAccount = () => {
 
@@ -47,10 +45,9 @@ const MyAccount = () => {
                      <h2 className="p-text-center">Mi cuenta</h2>
                   </div>
 
+                  <div><h3>Datos Personales</h3></div>
 
                   {user
-
-
 
                      ? <Formik
                         initialValues={{
@@ -60,6 +57,11 @@ const MyAccount = () => {
                            email: user.email || '',
                            age: user.age || '',
                            gender: user.gender || '',
+                           country: user.country || '',
+                           city: user.city || '',
+                           address: user.address || '',
+                           cp: user.cp || '',
+                           phone: user.phone || ''
 
                         }}
 
@@ -87,7 +89,7 @@ const MyAccount = () => {
                         onSubmit={(valores) => {
 
                            handleVerifly(valores)
-                           console.log(valores);
+                           //console.log(valores);
                            console.log('formulario enviado');
                            setValidate(true)
                            setTimeout(() => {
@@ -151,58 +153,24 @@ const MyAccount = () => {
                                     </div>
 
                                     <div>
-                                       <label htmlFor="gender" >Genero</label>
-                                       <Field
-                                          type='text'
-                                          id='gender'
-                                          name='gender'
-                                          placeholder='Ej: MHO'
-                                       />
+
+                                       <label htmlFor="gender" >Sexo</label>
+                                       <Field name='gender' as='select' >
+                                          <option value="M">Masculino</option>
+                                          <option value="F">Femenino</option>
+                                          <option value="O">Otro</option>
+
+                                       </Field >
+
                                        <ErrorMessage name='gender' component={() => (
                                           <p className='account-error'>{errors.gender}</p>
                                        )} />
                                     </div>
-
                                  </div>
-
-                                 {/* <div className='account-form-two'>
-                                    <div>
-                                       <label htmlFor="family_name" >family Nombre</label>
-                                       <Field
-                                          type='text'
-                                          id='family_name'
-                                          name='family_name'
-                                          placeholder='Joe'
-                                       />
-                                       <ErrorMessage name='family_name' component={() => (
-                                          <p className='account-error'>{errors.family_name}</p>
-                                       )} />
-                                    </div>
-
-                                    <div>
-                                       <label htmlFor="nickName" >Nick Name</label>
-                                       <Field
-                                          type='text'
-                                          id='nickName'
-                                          name='nickName'
-                                          placeholder='nickJoe'
-                                       />
-                                       <ErrorMessage name='nickName' component={() => (
-                                          <p className='account-error'>{errors.nickName}</p>
-                                       )} />
-                                    </div>
-
-                                 </div> */}
-
-
                               </div>
 
+
                               <div className='account-right'>
-
-
-
-
-
 
                                  <div className='account-form-one'>
                                     <label htmlFor="nickName" >Nick</label>
@@ -229,74 +197,99 @@ const MyAccount = () => {
                                        <p className='account-error'>{errors.email}</p>
                                     )} />
                                  </div>
-
-
-                                 {/*   <div className='account-form-two'>
-
-                                    <div>
-                                       <label htmlFor="family_name" >family Nombre</label>
-                                       <Field
-                                          type='text'
-                                          id='family_name'
-                                          name='family_name'
-                                          placeholder='Joe'
-                                       />
-
-                                       <ErrorMessage name='family_name' component={() => (
-                                          <div className='account-error'>{errors.family_name}</div>
-                                       )} />
-                                    </div>
-                                    <div>
-
-                                       <label htmlFor="family_name" >family Nombre</label>
-                                       <Field
-                                          type='text'
-                                          id='family_name'
-                                          name='family_name'
-                                          placeholder='Joe'
-                                       />
-
-                                       <ErrorMessage name='family_name' component={() => (
-                                          <p className='account-error'>{errors.family_name}</p>
-                                       )} />
-
-
-                                    </div>
-                                 </div> 
-
-                                 <div className='account-form-two'>
-                                    <div>
-                                       <label htmlFor="family_name" >family Nombre</label>
-                                       <Field
-                                          type='text'
-                                          id='family_name'
-                                          name='family_name'
-                                          placeholder='Joe'
-                                       />
-                                       <ErrorMessage name='family_name' component={() => (
-                                          <p className='account-error'>{errors.family_name}</p>
-                                       )} />
-                                    </div>
-
-                                    <div>
-                                       <label htmlFor="nickName" >Nick Name</label>
-                                       <Field
-                                          type='text'
-                                          id='nickName'
-                                          name='nickName'
-                                          placeholder='nickJoe'
-                                       />
-                                       <ErrorMessage name='nickName' component={() => (
-                                          <p className='account-error'>{errors.nickName}</p>
-                                       )} />
-                                    </div>
-
-                                 </div>
-*/}
-
-
-
                               </div>
+
+
+                              <div><h3>Dirección</h3></div>
+
+                              <div></div>
+
+                              <div className='account-address-label'>
+                                 <label htmlFor="country" >País</label>
+                              </div>
+
+                              <div className='account-address-input'>
+                                 <Field
+                                    type='text'
+                                    id='country'
+                                    name='country'
+                                    placeholder='Ej: Ecuador'
+                                 />
+                                 <ErrorMessage name='country' component={() => (
+                                    <p className='account-error'>{errors.country}</p>
+                                 )} />
+                              </div>
+
+                              <div className='account-address-label'>
+                                 <label htmlFor="city" >Ciudad</label>
+                              </div>
+                              <div className='account-address-input'>
+                                 <Field
+                                    type='text'
+                                    id='city'
+                                    name='city'
+                                    placeholder='Ej: Quito'
+                                 />
+                                 <ErrorMessage name='city' component={() => (
+                                    <p className='account-error'>{errors.city}</p>
+                                 )} />
+                              </div>
+
+
+
+                              <div className='account-address-label'>
+                                 <label htmlFor="address" >Dirección</label>
+                              </div>
+                              <div className='account-address-input'>
+                                 <Field
+                                    type='text'
+                                    id='address'
+                                    name='address'
+                                    placeholder='Ej: calle principal, secundaria'
+                                 />
+                                 <ErrorMessage name='address' component={() => (
+                                    <p className='account-error'>{errors.address}</p>
+                                 )} />
+                              </div>
+
+
+
+                              <div className='account-address-label'>
+                                 <label htmlFor="cp" >Código Postal</label>
+                              </div>
+                              <div className='account-address-input'>
+                                 <Field
+                                    type='text'
+                                    id='cp'
+                                    name='cp'
+                                    placeholder='Ej: 15852'
+                                 />
+                                 <ErrorMessage name='cp' component={() => (
+                                    <p className='account-error'>{errors.cp}</p>
+                                 )} />
+                              </div>
+
+
+
+
+                              <div className='account-address-label'>
+                                 <label htmlFor="phone" >Teléfono</label>
+                              </div>
+                              <div className='account-address-input'>
+                                 <Field
+                                    type='text'
+                                    id='phone'
+                                    name='phone'
+                                    placeholder='Ej: 0123456789'
+                                 />
+                                 <ErrorMessage name='phone' component={() => (
+                                    <p className='account-error'>{errors.phone}</p>
+                                 )} />
+                              </div>
+
+
+
+
 
                               <div >
                                  <Button icon="pi pi-check" >Registrate</Button>

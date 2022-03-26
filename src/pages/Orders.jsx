@@ -6,11 +6,49 @@ import AppContext from '../context/AppContext';
 
 const Orders = () => {
 
-   const { cart, removeToCart } = useContext(AppContext);
-
+   const { cart, removeToCart, postNewOrder } = useContext(AppContext);
+   // const [price, setPrice] = useState(0)
 
    const handleRemoveToCart = item => () => {
       removeToCart(item)
+   }
+
+   const getOrder = () => {
+
+      let orderList = cart.reduce((previousValue, currentValue) => {
+         previousValue.push(currentValue.id);
+         return previousValue
+      }, [])
+
+      console.log(orderList);
+      console.table(orderList);
+
+      const totalPrice = reducePrice()
+      const countItems = cart.length
+
+      const newOrder = {
+         'list': orderList,
+         totalPrice,
+         'countItems': countItems
+      }
+
+      console.log(newOrder);
+      console.table(newOrder);
+
+      //mando a llamar a la funcion que agrega una nueva orden 
+      //postNewOrder(nuevoPedido)
+   }
+
+
+
+   const reducePrice = () => {
+
+      const price = cart.reduce((previousValue, currentValue) => {
+         previousValue += currentValue.product.price
+         return previousValue
+      }, 0)
+
+      return price
    }
 
    return (
@@ -38,9 +76,16 @@ const Orders = () => {
                   }
 
                   <div className="orders-total">
-                     <h4>Productos:25</h4>
-                     <h4>{`Total:  $ 476`}</h4>
-                     <Button type="submit" label='Comprar' className="p-button-success p-button-sm" icon="pi pi-shopping-bag" />
+                     <h4> Productos: {cart.length}</h4>
+                     <h4>{`Total a pagar: $  ${reducePrice()}`} </h4>
+                     <Button
+                        type="submit"
+                        label='Comprar'
+                        className="p-button-success p-button-sm"
+                        icon="pi pi-shopping-bag"
+                        onClick={getOrder}
+
+                     />
                   </div>
 
                </div>

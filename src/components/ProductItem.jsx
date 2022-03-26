@@ -1,19 +1,22 @@
 import React from 'react'
-
 import { Button } from 'primereact/button';
 
 const ProductItem = ({ product, handleAddToCart }) => {
 
+  const { id } = product
+  const UID = id.slice(-5)
+
   return (
+
     <div className="p-col-12 p-md-4 p-lg-4">
-
       <div className="product-grid-item card">
-
         <div className="product-grid-item-top">
+
           <div>
-            <i className="pi pi-tag product-category-icon">{product.id}</i>
-            <span className="product-category"></span>
+            <p>{UID}</p>
+            {/*  <span className="product-category"></span> */}
           </div>
+
           <span className=''>{product.category}</span>
         </div>
 

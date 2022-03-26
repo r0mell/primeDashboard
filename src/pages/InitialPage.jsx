@@ -23,7 +23,10 @@ const InitialPage = () => {
                         <p>Esta es una demostracion de lo que podemos presentar</p>
                         {/* <ButtonLogin /> */}
                         {/* <Login /> */}
-                        <Link to='/login'><Button>Comencemos</Button></Link>
+                        <div className='initial-access'>
+                           <Link to='/logup'><Button>Registrate</Button></Link>
+                           <Link to='/login'><Button>Inicia Cesion</Button></Link>
+                        </div>
 
 
                      </div>

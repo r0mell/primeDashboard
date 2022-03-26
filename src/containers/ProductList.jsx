@@ -4,6 +4,7 @@ import useGetProducts from '../hooks/useGetProducts';
 import AppContext from '../context/AppContext';
 
 
+
 const ProductList = () => {
 
   const { products, addToEdit } = useContext(AppContext);
@@ -32,7 +33,7 @@ const ProductList = () => {
           <ProductItem
             key={product.id}
             product={product}
-          handleAddToCart={handleAddToCart} 
+            handleAddToCart={handleAddToCart} 
           />
         ))}
 

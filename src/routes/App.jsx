@@ -26,6 +26,7 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css'
 import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css';
+import Acquisitions from '../pages/Acquisitions';
 
 const App = () => {
 
@@ -36,18 +37,20 @@ const App = () => {
             <Layout>
                <Routes>
                   <Route exact path="/" element={<InitialPage />} />
-                  <Route exact path="/product/products" element={<Home />} />
                   <Route exact path="/login" element={<Login />} />
                   <Route exact path="/logup" element={<CreateAccount />} />
                   <Route exact path="/account" element={<MyAccount />} />
                   <Route exact path="/orders/order" element={<Orders />} />
+                  <Route exact path="/orders/checkpay" element={< CheckPay />} />
+
+                  <Route exact path="/orders/acquisitions" element={< Acquisitions />} />
+                  <Route exact path="/product/products" element={<Home />} />
                   <Route exact path="/product/editProduct" element={<EditProduct />} />
                   <Route exact path="/products/myProducts" element={<MyProducts />} />
                   <Route exact path="/products/discover" element={<Discover />} />
                   <Route exact path="/admin/checkout" element={< OrdesAdministrator />} />
                   <Route exact path="/admin/clients" element={< ClientsAdministrator />} />
                   <Route exact path="/admin/products" element={< ProductAdministrator />} />
-                  <Route exact path="/orders/checkpay" element={< CheckPay />} />
                   <Route exact path="/logout" element={< Logout />} />
                   <Route path="*" element={<NotFound />} />
 

@@ -2,36 +2,11 @@ import React, { useState, useEffect } from 'react';
 import TemplateDash from '../containers/TemplateDash';
 import axios from 'axios'
 import MaterialTable from '@material-table/core';
+import useGetAllProducts from '../hooks/useGetAllProducts'
 
 const ProductAdministrator = () => {
 
-   const [products, setProducts] = useState([])
-
-   const columnas = [
-      {
-         title: 'id',
-         field: 'id'
-      },
-      {
-         title: 'createdBy',
-         field: 'createdBy'
-      },
-      {
-         title: 'category',
-         field: 'category'
-      }
-   ]
-
-   useEffect(() => {
-
-      axios.get('http://localhost:3001/api/v1/products/')
-         .then(product => {
-            console.log(product.data)
-            setProducts(product.data)
-         })
-         .catch(e => console.log(e))
-   }, [])
-
+   const { columnas, products } = useGetAllProducts()
 
    return (
 

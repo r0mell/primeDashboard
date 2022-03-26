@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import TemplateDash from '../containers/TemplateDash';
 import MyProduct from '../components/MyProduct';
 import AppContext from '../context/AppContext';
@@ -6,12 +6,21 @@ import AppContext from '../context/AppContext';
 
 function MyProducts() {
 
-   const { myProducts, addToCart } = useContext(AppContext);
+   const { addToCart, getToEdits } = useContext(AppContext);
+   const [myProd, setmyProd] = useState(null)
+
+   useEffect(async () => {
+
+      const items = await getToEdits()
+      setmyProd(items)
+
+   }, [])
 
 
    const handleAddToCart = producto => () => {
       addToCart(producto);
    }
+
 
    return (
       <div className='layout-wrapper'>
@@ -22,20 +31,26 @@ function MyProducts() {
                <div className='myProduct-card'>
                   <h2>Mis Productos</h2>
 
-                  <input type="text" />
-                  <label htmlFor="">Buscar por fecha</label>
+                  <div className='myProduct-search'>
+
+                     <label htmlFor="">Buscar por talla</label>
+                     <input type="text" />
+
+                  </div>
+
+
                   <div className='myProduct-container'>
 
                      {
-                        myProducts.length
-                           ? myProducts.map((myProduct, index) => (
+                        myProd
+                           ? myProd.map((myProduct, index) => (
                               <MyProduct
                                  key={index}
                                  myProduct={myProduct}
                                  handleAddToCart={handleAddToCart} />
-
                            ))
-                           : <p>no tienes nuwvos prductos</p>
+
+                           : <p>no tienes productos</p>
                      }
 
                   </div>

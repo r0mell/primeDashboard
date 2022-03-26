@@ -114,8 +114,7 @@ const Login = () => {
 
                         <Button icon="pi pi-check" >Registrate</Button>
 
-                        <Link to="/loggup">Olvidaste tu contraseña?</Link> <br />
-                        <Link to="/loggup">No tienes cuenta? Registrate</Link>
+                        <Link to="/logup">No tienes cuenta? Regístrate</Link>
                      </div>
                   </Form>
                )}

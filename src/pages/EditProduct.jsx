@@ -10,7 +10,6 @@ import ItemToEdit from '../components/ItemToEdit';
 const EditProduct = () => {
 
    const { toEdit, removeToEdit } = useContext(AppContext);
-   //const { toEdit } = state;
 
    const [page, setPage] = useState(1);
    const [limitToEdit, setLimitToEdit] = useState([]);
@@ -73,7 +72,7 @@ const EditProduct = () => {
 
                                  />
                               ))
-                              : <p>No tenes productos que mostrar</p>
+                              : <p>No tienes productos que mostrar</p>
                         }
 
                         <button type='button' className='product-paginator-button' onClick={handlePageIncrement} > {`>`} </button>

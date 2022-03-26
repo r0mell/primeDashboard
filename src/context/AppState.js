@@ -4,6 +4,9 @@ import AppReducer from './AppReducer'
 import AppContext from './AppContext'
 import axios from 'axios'
 
+import generatorId from '../utils/uidGenerator'
+
+
 
 const AppState = (props) => {
 
@@ -29,6 +32,7 @@ const AppState = (props) => {
          state.userToken = newToken
 
          getProfile()
+         getToEdits()
       }
 
    }, [])
@@ -89,13 +93,50 @@ const AppState = (props) => {
 
    }
 
-   const addToEdit = (productToEdit) => {
+   const addToEdit = async (productToEdit) => {
 
+      // funcion para obtener un id unico para cada producto despues pasarlo a editar 
+      //y guardarlo dentro de la vase ded datos 
+
+
+      const id = generatorId()
+
+      const content = {
+         ...productToEdit,
+         "auxId": id
+      }
+      //console.log(id);
 
       dispatch({
          type: 'ADD_TOEDIT',
-         payload: productToEdit
+         payload: content
       })
+   }
+
+   const getToEdits = async () => {
+
+      //GET http://localhost:3001/api/v1/toEdit/62107709520b89f50719af02
+
+      const config = {
+         headers: {
+            Authorization: `Bearer ${state.userToken.token}`
+         }
+      }
+
+      let listToEdit
+
+      const URI = `http://localhost:3001/api/v1/toEdit/${state.user.id}`
+
+      try {
+         listToEdit = await axios.get(URI, config)
+         //console.log(listToEdit.data);
+         return listToEdit.data
+
+      } catch (error) {
+         console.log(error);
+      }
+
+
    }
 
    const removeToEdit = (toEditRemove) => {
@@ -107,23 +148,97 @@ const AppState = (props) => {
 
    }
 
-   const addMyProducts = (item) => {
+   const addMyProducts = async (newItem, valores) => {
 
-      console.log(item);
+      //guardar en la base de datos un nuevo producto usando la clase toedit 
+      //agregar atributos para personalizar la prenda 
+
+      const content = {
+         "productId": newItem.id
+      }
+
+      const newItemV = { ...content, ...valores }
+      console.log(newItemV);
+
+      // peticion para crear un nuevo usuario 
+
+      const config = {
+         headers: {
+            Authorization: `Bearer ${state.userToken.token}`
+         }
+      }
+
+      let itemToEdit
+
+      const URI = `http://localhost:3001/api/v1/toEdit`
+
+      try {
+         itemToEdit = await axios.post(URI, newItemV, config)
+         console.log(itemToEdit.data);
+
+      } catch (error) {
+         console.log(error);
+      }
+
 
       dispatch({
          type: 'ADD_MYPRODUCTS',
-         payload: item
+         payload: valores
       })
    }
 
+   const postNewOrder = async (arrayProducts) => {
+
+      const config = {
+         headers: {
+            Authorization: `Bearer ${state.userToken.token}`
+         }
+      }
+
+      const content = {
+         "myNewOrder": arrayProducts
+      }
+
+      let itemToEdit
+
+      const URI = ` http://localhost:3001/api/v1/order`
+
+      try {
+         itemToEdit = await axios.post(URI, content, config)
+         console.log(itemToEdit.data);
+
+      } catch (error) {
+         console.log(error);
+      }
+
+      dispatch({
+         /*  type: 'ADD_MYPRODUCTS',
+          payload: valores */
+      })
+   }
+
+   const getOrders = () => {
+
+      /* Aqui se tiene que llamar a las ordenes que ha realizado cada cliente  */
+
+   }
+
    const addToCart = (item) => {
-      console.log(item);
+
+
+      const id = generatorId()
+
+      const content = {
+         ...item,
+         "auxId": id
+      }
+
+      console.log(content);
 
 
       dispatch({
          type: 'ADD_CART',
-         payload: item
+         payload: content
       })
 
    }
@@ -174,9 +289,7 @@ const AppState = (props) => {
 
       let usuario
       try {
-
-
-         console.log(state.userToken.token);
+         //console.log(state.userToken.token);
          usuario = await axios.get('http://localhost:3001/api/v1/users/6229357a16f575c47a97b8ef', config)
 
       } catch (error) {
@@ -250,7 +363,9 @@ const AppState = (props) => {
          removeToCart,
          logout,
          logupUser,
-         putUser
+         putUser,
+         getToEdits,
+         postNewOrder
 
       }}>
 
