@@ -1,0 +1,85 @@
+.reportorder-container {
+   display: flex;
+   height: auto;
+   width: 100vw;
+   background-color: var(--surface-e);
+   flex-direction: column;
+   padding-top: 11vh;
+}
+.reportorder-title {
+   padding: 1rem 3rem 0rem 3rem;
+}
+.reportorder-header {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+
+   position: relative;
+   top: 10%;
+   img {
+      width: 10%;
+   }
+}
+.reportorder-information {
+   position: relative;
+   top: 10%;
+   padding: 0.5rem 3rem 0.5rem 3rem;
+   display: flex;
+   justify-content: space-around;
+}
+
+.reportorder-body {
+   display: flex;
+   flex-direction: column;
+   justify-content: start;
+   position: relative;
+   top: 10%;
+   padding: 0.5rem 3rem 0.5rem 7rem;
+}
+
+.reportorder-body-description {
+   display: flex;
+   position: relative;
+   top: 10%;
+   gap: 2rem;
+}
+
+.reportorder-body-description-second {
+   img {
+      width: 10%;
+   }
+}
+
+.reportorder-footer {
+   position: relative;
+   top: 10%;
+   padding: 1rem 3rem 3rem 3rem;
+   display: flex;
+   flex-direction: column;
+   table {
+      font-family: var(--font-family);
+      padding: 2.5rem 4rem 4rem 4rem;
+      width: 60%;
+      th {
+         text-align: left;
+         padding-bottom: 1.5rem;
+      }
+   }
+}
+
+.reportorder-button {
+   margin: 0;
+   padding: 1rem 1.3rem;
+   font-family: var(--font-family);
+   font-size: 1.5rem;
+   color: var(--surface-e);
+   border-radius: 6px;
+   border: 0;
+   margin: 1rem;
+   background: #002c8a;
+   &:hover {
+      color: #081e2f;
+      background: #009ae0;
+   }
+}

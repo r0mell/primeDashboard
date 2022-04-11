@@ -8,33 +8,31 @@ const useGetAllOrders = () => {
    const colums = [
       {
          title: 'UID',
-         field: 'UID'
+         field: 'UID',
+         editable: false
       },
       {
-         title: 'Nombre',
-         field: 'completeName'
-      },
-      {
-         title: 'Nick',
-         field: 'nickName'
-      },
-      {
-         title: 'email',
-         field: 'email'
-      },
-      {
-         title: 'isAdmin',
-         field: 'isAdmin'
+         title: 'Cliente',
+         field: 'client',
+         editable: false
       },
       {
          title: 'Cantidad Productos',
-         field: 'amountProducts'
+         field: 'amountProducts',
+         editable: false
       },
       {
-         title: 'Cantidad Ordenes',
-         field: 'amountOrders'
-      }
-
+         title: 'Precio Final',
+         field: 'totalPrice',
+         type: "currency",
+         align: "left",
+         editable: false
+      },
+      {
+         title: 'Estado Orden',
+         field: 'orderState',
+         lookup: { "pending": "Pendiente", "inprocess": "En Proceso", "sent": "Enviado" }
+      },
    ]
 
    useEffect(async () => {
@@ -42,18 +40,19 @@ const useGetAllOrders = () => {
       try {
          const orders = await axios.get('http://localhost:3001/api/v1/order')
 
-         /*const allUsers = users.data.map((item) => {
+         const allOrders = orders.data.map((item) => {
             return {
                ...item,
-               'amountProducts': item.toEdit.length,
-               'completeName': item.firstName + ' ' + item.lastName,
                'UID': item.id.slice(-5),
-               'amountOrders': item.order.length
+               'amountProducts': item.productList.length,
+               'totalPrice': item.totalPrice,
+               'client': item.productList[0].user.email
+               //'amountOrders': item.order.length,
             }
          })
-         console.log(allUsers);
-         setUsers(allUsers)*/
-         console.log(orders.data);
+         //console.log(allUsers);
+         //console.log(orders.data);
+         setOrders(allOrders)
 
 
       } catch (error) {

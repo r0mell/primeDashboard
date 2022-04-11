@@ -44,7 +44,7 @@ const EditProduct = () => {
    }
 
    const handleCanceLoadItem = product => () => {
-      setLoadItem(product)
+      //setLoadItem(product)
    }
 
    return (
@@ -81,7 +81,10 @@ const EditProduct = () => {
                      <div className='edit-toEdit'>
                         {
                            loadItem
-                              ? <ItemDetail itemDetail={loadItem} handleCanceLoadItem={handleCanceLoadItem} />
+                              ? <ItemDetail
+                                 itemDetail={loadItem}
+                                 handleCanceLoadItem={handleCanceLoadItem}
+                              />
                               : <p>Elige un item para editarlo</p>
                         }
                      </div>

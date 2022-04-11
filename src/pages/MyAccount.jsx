@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import AppContext from '../context/AppContext';
@@ -7,8 +6,6 @@ import AppContext from '../context/AppContext';
 import MenuItems from '../constants/consts';
 import Header from '../components/Header'
 import Menu from '../components/Menu'
-
-import { Button } from 'primereact/button';
 
 
 const MyAccount = () => {
@@ -287,12 +284,8 @@ const MyAccount = () => {
                                  )} />
                               </div>
 
-
-
-
-
                               <div >
-                                 <Button icon="pi pi-check" >Registrate</Button>
+                                 <button className='reportorder-button'>Actualizar</button>
                               </div>
 
                               <div>

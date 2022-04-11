@@ -10,10 +10,11 @@ const OrderItem = ({ itemCart, handleRemoveToCart }) => {
 
             <div className="image-container">
 
-               <img src={itemCart.product.images[2]} alt={itemCart.product.title} />
+               <img src={itemCart.imagesProduct.template} alt={itemCart.product.title} />
+               <img src={itemCart.imagesProduct.logo} alt={itemCart.product.title} />
 
                <div>
-                  <h5 className="p-mb-2">{itemCart.product.title}</h5>
+                  <h5 className="p-mb-2">{itemCart.proyectName}</h5>
                   <span className="product-category">@ {itemCart.user.nickName}</span>
                </div>
 
@@ -21,7 +22,7 @@ const OrderItem = ({ itemCart, handleRemoveToCart }) => {
 
             <div className="product-list-detail">
 
-               <h4 className="p-mb-2">{`$  ${itemCart.product.price}`}</h4>
+               <h4 className="p-mb-2">{`$  ${itemCart.updatePrice}`}</h4>
 
             </div>
 

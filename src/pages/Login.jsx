@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import { Link, useNavigate } from 'react-router-dom';
-import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
 
 import HeaderMain from '../components/HeaderMain';
 import AppContext from '../context/AppContext';
@@ -13,6 +13,7 @@ const Login = () => {
 
    const { getToken } = useContext(AppContext)
    const [validate, setValidate] = useState(false)
+   const toast = useRef()
 
    const sunmitFuction = async (valores, resetForm) => {
 
@@ -21,12 +22,15 @@ const Login = () => {
       console.log(tokenAux);
       console.log('formulario enviado');
 
+      toast.current.show({ severity: 'success', summary: 'Inicio Correcto', detail: 'Iniciando Sesión' });
+
       setValidate(true)
       resetForm()
 
       setTimeout(() => {
          setValidate(false)
          console.log('procesando informacion ');
+
       }, 2000);
 
 
@@ -39,6 +43,8 @@ const Login = () => {
    return (
       <>
          <HeaderMain />
+
+         <Toast ref={toast} />
 
          <div className="login-box">
             <h1>Inicia Sesion</h1>
@@ -112,7 +118,8 @@ const Login = () => {
 
                      <div className="log-access">
 
-                        <Button icon="pi pi-check" >Registrate</Button>
+                        <button icon="pi pi-check" className='login-button' >Registrate</button>
+
 
                         <Link to="/logup">No tienes cuenta? Regístrate</Link>
                      </div>

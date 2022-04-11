@@ -7,7 +7,6 @@ import AppContext from '../context/AppContext';
 const Orders = () => {
 
    const { cart, removeToCart, postNewOrder } = useContext(AppContext);
-   // const [price, setPrice] = useState(0)
 
    const handleRemoveToCart = item => () => {
       removeToCart(item)
@@ -20,15 +19,15 @@ const Orders = () => {
          return previousValue
       }, [])
 
-      console.log(orderList);
-      console.table(orderList);
+      //console.log(orderList);
+      //console.table(orderList);
 
       const totalPrice = reducePrice()
       const countItems = cart.length
 
       const newOrder = {
-         'list': orderList,
-         totalPrice,
+         'productList': orderList,
+         'totalPrice': totalPrice,
          'countItems': countItems
       }
 
@@ -36,7 +35,7 @@ const Orders = () => {
       console.table(newOrder);
 
       //mando a llamar a la funcion que agrega una nueva orden 
-      //postNewOrder(nuevoPedido)
+      postNewOrder(newOrder)
    }
 
 
@@ -44,7 +43,7 @@ const Orders = () => {
    const reducePrice = () => {
 
       const price = cart.reduce((previousValue, currentValue) => {
-         previousValue += currentValue.product.price
+         previousValue += currentValue.updatePrice
          return previousValue
       }, 0)
 

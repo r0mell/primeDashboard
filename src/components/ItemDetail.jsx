@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
 
 import { Button } from 'primereact/button';
@@ -7,15 +7,14 @@ import Carousel from '../containers/Carousel';
 
 import images from '../constants/imagesCarousel'
 
-import atom from '../assets/img/atom.png'
+let URLIMAGE = ''
 
-const PruebaTest = ({ item }) => {
+//estas componente renderiza tanto las fotografias como el carrucel 
+const ImagesLayout = ({ item }) => {
 
    const { values } = useFormikContext()
-   const [coordLogo, setCoordLogo] = useState({ x: 0, y: 0 })
    const [indexImage, setIndexImage] = useState(0)
 
-   //funcion que obtine los valores de x,y y los setea para permitir la traslacion de la imagen 
    const positionLogo = (position) => {
 
       let top
@@ -51,7 +50,10 @@ const PruebaTest = ({ item }) => {
    }
 
    const getIndexCarousel = imageGallery => () => {
+
+      URLIMAGE = images[imageGallery.getCurrentIndex()].original
       setIndexImage(imageGallery.getCurrentIndex())
+
    }
 
    const changeImage = (color) => {
@@ -68,11 +70,12 @@ const PruebaTest = ({ item }) => {
 
    return (
       <>
-         <div className='itemDetail-images-first' >
+         <div className='itemDetail-images-first'  >
             <img
                className='itemDetail-images-template'
                src={changeImage(values.color) || item.images[0]}
                alt={values.color}
+
             />
 
             <img
@@ -94,45 +97,33 @@ const PruebaTest = ({ item }) => {
    )
 }
 
+
+
+//item main para renderizado
 const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
-   const { createdBy, addMyProducts } = useContext(AppContext);
+   const { addMyProducts } = useContext(AppContext);
 
-   //const [priceProduct, setPriceProduct] = useState(itemDetail.price)
 
    const calculatePrice = (stampingType) => {
 
       if (stampingType == 'bordado') {
-
-         //setPriceProduct(itemDetail.price + 5)
          return itemDetail.price + 5
       }
 
       if (stampingType == 'estampado') {
-
-         //setPriceProduct(itemDetail.price + 2.50)
          return itemDetail.price + 2.50
-      }
-   }
-
-   const changeImage = (color) => {
-      if (color == 'black') {
-         return itemDetail.images[0]
-      }
-      if (color == 'red') {
-         return itemDetail.images[1]
-      }
-      if (color == 'white') {
-         return itemDetail.images[2]
       }
    }
 
    const createMyProduct = (valores, resetForm) => {
 
-      addMyProducts(itemDetail, valores)
+      addMyProducts(itemDetail, valores, URLIMAGE)
       resetForm()
 
    }
+
+
 
    return (
       <div className='itemDetail-container'>
@@ -167,10 +158,8 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
                   createMyProduct(valores, resetForm)
 
-                  //console.log(valores);
 
                }}
-
 
             >
                {({ errors, values }) => (
@@ -179,7 +168,10 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
                      <div className='itemDetail-images-grid'>
 
-                        <PruebaTest item={itemDetail} />
+                        <ImagesLayout
+                           item={itemDetail}
+
+                        />
 
                      </div>
 
@@ -258,7 +250,7 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
                      <div className='itemDetail-footer'>
                         <Button label="Cancelar" icon="pi pi-times" className="p-button-text p-button-sm" onClick={handleCanceLoadItem} />
-                        <Button label="Guardar" icon="pi pi-check" className="p-button-text p-button-sm" />
+                        <Button type='submit' label="Guardar" icon="pi pi-check" className="p-button-text p-button-sm" />
 
                      </div>
                   </Form>

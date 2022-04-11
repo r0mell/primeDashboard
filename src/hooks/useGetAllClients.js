@@ -8,31 +8,38 @@ const useGetAllClients = () => {
    const colums = [
       {
          title: 'UID',
-         field: 'UID'
+         field: 'UID',
+         editable: false
       },
       {
          title: 'Nombre',
-         field: 'completeName'
+         field: 'completeName',
+         editable: false
       },
       {
          title: 'Nick',
-         field: 'nickName'
+         field: 'nickName',
+         editable: false
       },
       {
          title: 'email',
-         field: 'email'
+         field: 'email',
+         editable: false
       },
       {
          title: 'isAdmin',
-         field: 'isAdmin'
+         field: 'isAdmin',
+         lookup: { true: "Admin", false: "Client" }
       },
       {
          title: 'Cantidad Productos',
-         field: 'amountProducts'
+         field: 'amountProducts',
+         editable: false
       },
       {
          title: 'Cantidad Ordenes',
-         field: 'amountOrders'
+         field: 'amountOrders',
+         editable: false
       }
 
    ]

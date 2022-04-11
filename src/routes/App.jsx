@@ -27,6 +27,8 @@ import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css';
 import Acquisitions from '../pages/Acquisitions';
+import ReportOrder from '../pages/ReportOrder';
+
 
 const App = () => {
 
@@ -42,8 +44,12 @@ const App = () => {
                   <Route exact path="/account" element={<MyAccount />} />
                   <Route exact path="/orders/order" element={<Orders />} />
                   <Route exact path="/orders/checkpay" element={< CheckPay />} />
-
                   <Route exact path="/orders/acquisitions" element={< Acquisitions />} />
+                  <Route exact path="/orders/reports" element={< ReportOrder />} />
+
+                  <Route exact path="/orders/reports/:idreport" element={< ReportOrder />} />
+
+
                   <Route exact path="/product/products" element={<Home />} />
                   <Route exact path="/product/editProduct" element={<EditProduct />} />
                   <Route exact path="/products/myProducts" element={<MyProducts />} />

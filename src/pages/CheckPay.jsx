@@ -1,19 +1,27 @@
 import React from 'react';
-import TemplateDash from '../containers/TemplateDash';
+import { Link } from 'react-router-dom'
+
+import paypal from '../assets/img/PayPal.png'
+import HeaderMain from '../components/HeaderMain';
 
 const CheckPay = () => {
+
    return (
-      <div className='layout-wrapper'>
 
-         <TemplateDash />
 
-         <div className="layout-main-container">
-            <div className="layout-main">
-               <div>pago verificado y a espera del producto</div>
+      <div className='checkpay-container'>
+         <HeaderMain />
 
-            </div>
-         </div>
+         <img src={paypal} alt="logo-paypal" />
+         <h1>Gracias Por Tu Compra !!</h1>
+         <h3>Tu pago se ha verificado, tu orden esta siendo procesada.</h3>
+
+         <Link to='/product/products'>
+            <button >Volver</button>
+         </Link>
+
       </div>
+
    )
 }
 

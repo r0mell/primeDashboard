@@ -125,7 +125,7 @@ function CreateAccount() {
 
                      <div className="log-access">
 
-                        <Button icon="pi pi-check" >Registrate</Button>
+                        <button className='login-button' >Registrate</button>
 
                         <Link to="/login"><p>
 

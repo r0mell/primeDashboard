@@ -11,11 +11,13 @@ import generatorId from '../utils/uidGenerator'
 const AppState = (props) => {
 
 
+
+
    const initialState = {
 
       createdBy: 'r0mell',
       user: null,
-      userToken: null,
+      userToken: {},
       products: [],
       toEdit: [],
       myProducts: [],
@@ -148,19 +150,50 @@ const AppState = (props) => {
 
    }
 
-   const addMyProducts = async (newItem, valores) => {
+   const addMyProducts = async (newItem, valores, URLIMAGE) => {
 
       //guardar en la base de datos un nuevo producto usando la clase toedit 
       //agregar atributos para personalizar la prenda 
 
-      const content = {
-         "productId": newItem.id
+      const calculatePrice = () => {
+
+         if (valores.stampingType == 'bordado') {
+            return {
+               updatePrice: newItem.price + 5
+            }
+         }
+
+         if (valores.stampingType == 'estampado') {
+            return {
+               updatePrice: newItem.price + 2.50
+            }
+         }
       }
 
-      const newItemV = { ...content, ...valores }
+      const getColor = () => {
+
+         if (valores.color == 'black') {
+            return newItem.images[1]
+         }
+         if (valores.color == 'red') {
+            return newItem.images[2]
+         }
+         if (valores.color == 'white') {
+            return newItem.images[0]
+         }
+      }
+
+      const content = {
+         "productId": newItem.id,
+         "imagesProduct": {
+            "logo": URLIMAGE,
+            "template": getColor()
+         }
+      }
+
+      const newItemV = { ...content, ...valores, ...calculatePrice() }
       console.log(newItemV);
 
-      // peticion para crear un nuevo usuario 
 
       const config = {
          headers: {
@@ -195,26 +228,35 @@ const AppState = (props) => {
          }
       }
 
-      const content = {
-         "myNewOrder": arrayProducts
-      }
-
       let itemToEdit
 
-      const URI = ` http://localhost:3001/api/v1/order`
+      console.log(arrayProducts);
+
+
+      const URI = `http://localhost:3001/api/v1/order/create-order`
 
       try {
-         itemToEdit = await axios.post(URI, content, config)
-         console.log(itemToEdit.data);
+         itemToEdit = await axios.post(URI, arrayProducts, config)
+         console.log(itemToEdit.data.links[1].href);
+
+         window.location.href = `${itemToEdit.data.links[1].href}`;
+
+
 
       } catch (error) {
          console.log(error);
       }
 
+
+
+      /*
+
       dispatch({
-         /*  type: 'ADD_MYPRODUCTS',
-          payload: valores */
-      })
+           type: 'ADD_MYPRODUCTS',
+          payload: valores 
+      }) */
+
+
    }
 
    const getOrders = () => {
@@ -233,7 +275,7 @@ const AppState = (props) => {
          "auxId": id
       }
 
-      console.log(content);
+      //console.log(content);
 
 
       dispatch({
@@ -343,6 +385,36 @@ const AppState = (props) => {
    }
 
 
+   const putOrderState = async (newOrderState, idOrder) => {
+
+      console.log(newOrderState);
+      console.log(idOrder);
+
+
+      const config = {
+         headers: {
+            Authorization: `Bearer ${state.userToken.token}`
+         }
+      }
+
+      const orderState = {
+         "orderState": `${newOrderState}`
+      }
+
+      const URI = `http://localhost:3001/api/v1/order/changeState/${idOrder}`
+
+      try {
+         const updateOrderState = await axios.put(URI, orderState, config)
+         console.log(updateOrderState.data);
+
+      } catch (error) {
+         console.log(error);
+      }
+
+
+
+   }
+
    return (
       <AppContext.Provider value={{
          user: state.user,
@@ -365,7 +437,8 @@ const AppState = (props) => {
          logupUser,
          putUser,
          getToEdits,
-         postNewOrder
+         postNewOrder,
+         putOrderState
 
       }}>
 

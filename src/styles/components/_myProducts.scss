@@ -33,13 +33,11 @@
 }
 
 .myProduct-grid-item {
+   position: relative;
    text-align: center;
    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-   padding: 1rem;
+   padding: 1rem 0.25rem 1rem 0.25rem;
 
-   img {
-      width: 70%;
-   }
    h3 {
       margin: 0rem 0rem 1rem 0rem;
    }
@@ -60,9 +58,7 @@
          padding: 0.2rem 1rem;
       }
    }
-   /*  span {
-      margin: 0.7rem 0;
-   } */
+
    button {
       margin: 0;
       padding: 0.6rem 0.6rem;
@@ -81,4 +77,21 @@
       border: 0;
       background: #39cdfc;
    }
+}
+
+.myProduct-item-template {
+   padding: 0.25rem;
+   width: 95%;
+   height: auto;
+}
+
+.myProduct-item-logo {
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   left: 0px;
+   bottom: 0px;
+   font-size: 1rem;
+   color: red;
+   height: 30px;
 }

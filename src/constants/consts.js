@@ -5,12 +5,12 @@ const MENU = [
       items: [
          {
             label: "Productos Unick",
-            icon: "pi pi-fw pi-bookmark",
+            icon: "pi pi-fw pi-clone",
             to: '/product/products',
          },
          {
             label: "Editar Producto",
-            icon: "pi pi-fw pi-external-link",
+            icon: "pi pi-fw pi-cog",
             to: '/product/editProduct',
          },
          /*   {
@@ -20,7 +20,7 @@ const MENU = [
            }, */
          {
             label: "Mis Productos",
-            icon: "pi pi-fw pi-trash",
+            icon: "pi pi-fw pi-folder-open",
             to: '/products/myProducts',
          },
       ],
@@ -31,19 +31,19 @@ const MENU = [
       items: [
          {
             label: "Tu Orden",
-            icon: "pi pi-fw pi-pencil",
+            icon: "pi pi-fw pi-shopping-cart",
             to: '/orders/order',
 
          },
-         {
+         /* {
             label: "Pagos",
-            icon: "pi pi-fw pi-prime",
+            icon: "pi pi-fw pi-paypal",
             to: '/orders/checkpay',
 
-         },
+         },  */
          {
             label: "Tus Compras",
-            icon: "pi pi-fw pi-calendar-times",
+            icon: "pi pi-fw pi-calendar-plus",
             to: '/orders/acquisitions',
          },
 
@@ -55,18 +55,18 @@ const MENU = [
       items: [
          {
             label: "Crear producto",
-            icon: "pi pi-fw pi-pencil",
+            icon: "pi pi-fw pi-shopping-bag",
             to: '/admin/products',
 
          },
          {
             label: "Clientes",
-            icon: "pi pi-fw pi-prime",
+            icon: "pi pi-fw pi-id-card",
             to: '/admin/clients',
          },
          {
             label: "Ordenes",
-            icon: "pi pi-fw pi-calendar-times",
+            icon: "pi pi-fw pi-wallet",
             to: '/admin/checkout',
          },
 
@@ -78,12 +78,12 @@ const MENU = [
       items: [
          {
             label: "Mi Cuenta",
-            icon: "pi pi-fw pi-user-plus",
+            icon: "pi pi-fw pi-user-edit",
             to: "/account"
          },
          {
             label: "Salir",
-            icon: "pi pi-fw pi-user-minus",
+            icon: "pi pi-fw pi-sign-out",
             to: '/logout'
          },
       ],

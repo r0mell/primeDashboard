@@ -40,11 +40,21 @@ const Acquisitions = () => {
          <TemplateDash />
          <div className="layout-main-container">
             <div className="layout-main">
-               <h2>hola desmi mi cuarto </h2>
+
 
                <MaterialTable
                   columns={columnas}
                   data={products}
+                  title="Tus Compras"
+
+                  options={{
+                     search: false,
+                     pageSizeOptions: [10, 15], pageSize: 10, paginationType: "stepped", showFirstLastPageButtons: false,
+
+
+                  }}
+
+
                />
 
 
