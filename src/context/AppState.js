@@ -15,7 +15,6 @@ const AppState = (props) => {
 
    const initialState = {
 
-      createdBy: 'r0mell',
       user: null,
       userToken: {},
       products: [],
@@ -410,10 +409,73 @@ const AppState = (props) => {
       } catch (error) {
          console.log(error);
       }
+   }
 
 
+
+   const putAdminPermits = async (isAdmin, id) => {
+
+      console.log(isAdmin);
+      console.log(id);
+
+
+
+      const config = {
+         headers: {
+            Authorization: `Bearer ${state.userToken.token}`
+         }
+      }
+
+      const adminPermits = {
+         "isAdmin": isAdmin,
+         "id": id
+      }
+
+      console.log(adminPermits);
+
+
+
+      const URI = `http://localhost:3001/api/v1/users/adminPermits`
+
+      try {
+         const userPermits = await axios.put(URI, adminPermits, config)
+         //console.log(token.data);
+
+      } catch (error) {
+         console.log(error);
+      }
 
    }
+
+
+
+   const getUserOrders = async () => {
+
+      const config = {
+         headers: {
+            Authorization: `Bearer ${state.userToken.token}`
+         }
+      }
+
+      let userOrders
+
+
+
+      const URI = `http://localhost:3001/api/v1/order/clients/ordersBy`
+
+      try {
+         userOrders = await axios.get(URI, config)
+         //console.log(userOrders.data);
+
+      } catch (error) {
+         console.log(error);
+      }
+
+      return userOrders
+   }
+
+
+
 
    return (
       <AppContext.Provider value={{
@@ -438,7 +500,9 @@ const AppState = (props) => {
          putUser,
          getToEdits,
          postNewOrder,
-         putOrderState
+         putOrderState,
+         putAdminPermits,
+         getUserOrders
 
       }}>
 

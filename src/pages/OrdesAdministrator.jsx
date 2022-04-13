@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 import { Toast } from 'primereact/toast';
@@ -13,8 +13,10 @@ const OrdesAdministrator = () => {
 
    const { putOrderState } = useContext(AppContext)
    const { orders, colums } = useGetAllOrders()
+
    const navigate = useNavigate()
    const toast = useRef()
+
 
    const generateReport = (data) => {
 
@@ -29,7 +31,8 @@ const OrdesAdministrator = () => {
    const updateStateOrder = (newRow) => {
 
       const { orderState, id } = newRow
-      putOrderState(orderState,id)
+      putOrderState(orderState, id)
+
    }
 
    return (
@@ -41,7 +44,6 @@ const OrdesAdministrator = () => {
             <Toast ref={toast} />
             <div className="layout-main">
                <div>
-                  {/* <p>esto es la pagina para administracion de ordenes de compras realidas</p> */}
 
                   <MaterialTable
                      columns={colums}

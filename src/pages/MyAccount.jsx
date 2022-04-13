@@ -21,7 +21,7 @@ const MyAccount = () => {
       putUser(updateUser)
    }
 
-   const [validate, setValidate] = useState(false)
+   /* const [validate, setValidate] = useState(false) */
 
    return (
       //todos los componentes tienen que tener 
@@ -288,10 +288,10 @@ const MyAccount = () => {
                                  <button className='reportorder-button'>Actualizar</button>
                               </div>
 
-                              <div>
+                              {/* <div>
                                  {validate && <p>ingresado correctamente</p>}
                               </div>
-
+ */}
                            </Form>
                         )}
                      </Formik>

@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
-import logoDark from '../assets/icons/logo-dark.svg'
-
+/* import logoDark from '../assets/icons/logo-dark.svg' */
+import logoUnick from '../assets/icons/Unick_logo.png'
 
 const Header = (props) => {
 
@@ -12,8 +12,8 @@ const Header = (props) => {
    return (
       <div className="layout-topbar">
          <Link to="/home" className="layout-topbar-logo">
-            <img src={logoDark} alt="logo" />
-            <span>Unick</span>
+            <img src={logoUnick} alt="logo" />
+           {/*  <span>Unick</span> */}
          </Link>
 
          <button type="button" className="p-link  layout-menu-button layout-topbar-button" onClick={props.onToggleMenuClick}>

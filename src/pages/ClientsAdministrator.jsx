@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TemplateDash from '../containers/TemplateDash';
 import MaterialTable from '@material-table/core';
 import useGetAllClients from '../hooks/useGetAllClients';
 import { ExportCsv, ExportPdf } from '@material-table/exporters';
+import AppContext from '../context/AppContext';
 
 
 const ClientsAdministrator = () => {
 
    const { users, colums } = useGetAllClients()
+   const { putAdminPermits } = useContext(AppContext)
 
-   const updatePermits = (newClient, oldClient) => {
+   const updatePermits = (newClient) => {
 
-      //un Patch para actualizar el estado 
-      console.log(newClient, oldClient);
+      //un Patch para actualizar los permisos de administrador
+
+      const { isAdmin, id } = newClient
+      console.log(newClient);
+      putAdminPermits(isAdmin, id)
    }
 
    return (
@@ -31,7 +36,7 @@ const ClientsAdministrator = () => {
                   editable={{
                      onRowUpdate: (newRow, oldRow) => new Promise((resolve, reject) => {
 
-                        updatePermits(newRow, oldRow)
+                        updatePermits(newRow)
                         setTimeout(() => resolve(), 500)
                      })
 

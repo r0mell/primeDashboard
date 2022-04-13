@@ -1,36 +1,92 @@
+import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import MaterialTable from '@material-table/core'
-import React, { useEffect, useState } from 'react'
-import TemplateDash from '../containers/TemplateDash'
 import axios from 'axios'
+import TemplateDash from '../containers/TemplateDash'
+import { Toast } from 'primereact/toast';
+
 
 const Acquisitions = () => {
 
-
-   const [products, setProducts] = useState([])
-
-   const columnas = [
+   const colums = [
       {
-         title: 'id',
-         field: 'id'
+         title: 'UID',
+         field: 'UID'
       },
       {
-         title: 'createdBy',
-         field: 'createdBy'
+         title: 'Cliente',
+         field: 'client'
       },
       {
-         title: 'category',
-         field: 'category'
-      }
+         title: 'Cantidad Productos',
+         field: 'amountProducts',
+         align: "center",
+      },
+      {
+         title: 'Precio Final',
+         field: 'totalPrice',
+         type: "currency",
+         align: "left"
+      },
+      {
+         title: 'Estado Orden',
+         field: 'orderState',
+         lookup: { "pending": "Pendiente", "inprocess": "En Proceso", "sent": "Enviado" }
+      },
    ]
 
-   useEffect(() => {
+   const URI = `http://localhost:3001/api/v1/order/clients/ordersBy`
 
-      axios.get('http://localhost:3001/api/v1/products/')
-         .then(product => {
-            console.log(product.data)
-            setProducts(product.data)
+   const [orderss, setorders] = useState(null)
+   const toast = useRef()
+   const navigate = useNavigate()
+
+
+   const generateReport = (data) => {
+
+      toast.current.show({ severity: 'info', summary: 'Generando Orden', detail: 'El detalle de la orden esta siendo generada' });
+
+      console.log(data.id);
+      setTimeout(() => {
+         navigate(`/orders/reports/${data.id}`)
+      }, 2000);
+
+   }
+
+
+   useEffect(async () => {
+
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      const newToken = JSON.parse(loggedUserJSON)
+
+      const config = {
+         headers: {
+            Authorization: `Bearer ${newToken.token}`
+         }
+      }
+
+      try {
+
+         const userOrders = await axios.get(URI, config)
+
+         const ordersByUser = userOrders.data.order.map((item) => {
+
+            return {
+               ...item,
+               'UID': item.id.slice(-5),
+               'amountProducts': item.productList.length,
+               'totalPrice': item.totalPrice,
+               'client': userOrders.data.nickName
+            }
+
          })
-         .catch(e => console.log(e))
+         setorders(ordersByUser);
+         console.log(userOrders.data);
+
+
+      } catch (error) {
+         console.log(error);
+      }
    }, [])
 
 
@@ -39,23 +95,48 @@ const Acquisitions = () => {
       <div className='layout-wrapper'>
          <TemplateDash />
          <div className="layout-main-container">
+            <Toast ref={toast} />
             <div className="layout-main">
 
+               {
+                  orderss
+                     ? <MaterialTable
+                        columns={colums}
+                        data={orderss}
 
-               <MaterialTable
-                  columns={columnas}
-                  data={products}
-                  title="Tus Compras"
+                        actions={[
+                           {
+                              icon: () => <i className="pi pi-file-pdf"></i>,
+                              tooltip: 'generate report',
+                              onClick: (event, rowData) => {
 
-                  options={{
-                     search: false,
-                     pageSizeOptions: [10, 15], pageSize: 10, paginationType: "stepped", showFirstLastPageButtons: false,
+                                 generateReport(rowData)
+
+                              }
+                           }
+                        ]}
+
+                        options={{
+                           exportMenu: [{
+                              label: 'Export PDF',
+                              exportFunc: (cols, datas) => ExportPdf(cols, datas, 'OrdersAdministrator')
+                           }, {
+                              label: 'Export CSV',
+                              exportFunc: (cols, datas) => ExportCsv(cols, datas, 'OrdersAdministrator')
+                           }],
+                           pageSizeOptions: [10, 15], pageSize: 10, paginationType: "stepped", showFirstLastPageButtons: false,
+                           actionsColumnIndex: -1
+
+                        }}
+                        title="Tus Compras"
+                     />
+
+                     : <h2>rending</h2>
+               }
 
 
-                  }}
 
 
-               />
 
 
             </div>

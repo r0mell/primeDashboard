@@ -33,8 +33,8 @@ function MyProducts() {
 
                   <div className='myProduct-search'>
 
-                     <label htmlFor="">Buscar por talla</label>
-                     <input type="text" />
+                     {/* <label htmlFor="">Buscar por talla</label>
+                     <input type="text" /> */}
 
                   </div>
 
@@ -50,7 +50,7 @@ function MyProducts() {
                                  handleAddToCart={handleAddToCart} />
                            ))
 
-                           : <p>no tienes productos</p>
+                           : <p>No tienes productos</p>
                      }
 
                   </div>

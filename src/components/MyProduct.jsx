@@ -47,7 +47,7 @@ const MyProduct = ({ myProduct, handleAddToCart }) => {
          <h3>{myProduct.proyectName}</h3>
          <p><span>{myProduct.size}</span> </p>
          <p>Precio: $ {myProduct.updatePrice}</p>
-         <button onClick={handleAddToCart(myProduct)}>Comprar</button>
+         <button className='login-button' onClick={handleAddToCart(myProduct)}>Comprar</button>
 
       </div >
    );
