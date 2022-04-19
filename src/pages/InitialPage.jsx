@@ -25,7 +25,7 @@ const InitialPage = () => {
                         {/* <Login /> */}
                         <div className='initial-access'>
                            <Link to='/logup'><Button>Registrate</Button></Link>
-                           <Link to='/login'><Button>Inicia Cesion</Button></Link>
+                           <Link to='/login'><Button>Inicia Sesión</Button></Link>
                         </div>
 
 

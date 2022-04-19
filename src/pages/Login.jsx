@@ -47,7 +47,7 @@ const Login = () => {
          <Toast ref={toast} />
 
          <div className="login-box">
-            <h1>Inicia Sesion</h1>
+            <h1>Inicia Sesión</h1>
 
 
             <Formik
@@ -118,7 +118,7 @@ const Login = () => {
 
                      <div className="log-access">
 
-                        <button icon="pi pi-check" className='login-button' >Registrate</button>
+                        <button icon="pi pi-check" className='login-button' >Ingresar</button>
 
 
                         <Link to="/logup">No tienes cuenta? Regístrate</Link>
