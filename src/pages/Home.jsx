@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import Header from '../components/Header';
 import Menu from '../components/Menu';
-import MenuItems from '../constants/consts';
-import { InputText } from 'primereact/inputtext'
 import ProductList from '../containers/ProductList';
+
+import MenuItems from '../constants/consts';
 import AppContext from '../context/AppContext';
 
 /* const [overlayMenuActive, setOverlayMenuActive] = useState(false); */
@@ -13,12 +13,6 @@ import AppContext from '../context/AppContext';
 const Home = () => {
 
    const { getProfile } = useContext(AppContext)
-
-   /*   useEffect(() => {
-  
-        getProfile()
-  
-     }, []) */
 
 
    const onMenuItemClick = (event) => {

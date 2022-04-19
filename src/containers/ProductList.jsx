@@ -22,7 +22,14 @@ const ProductList = () => {
   }
 
   const handlePageDecrement = () => {
-    setPage(page - 1)
+
+    if (page == 1) {
+      setPage(1)
+    } else {
+
+      setPage(page - 1)
+    }
+
   }
 
   return (
@@ -33,7 +40,7 @@ const ProductList = () => {
           <ProductItem
             key={product.id}
             product={product}
-            handleAddToCart={handleAddToCart} 
+            handleAddToCart={handleAddToCart}
           />
         ))}
 

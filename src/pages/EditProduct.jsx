@@ -32,7 +32,13 @@ const EditProduct = () => {
    }
 
    const handlePageDecrement = () => {
-      setPage(page - 1)
+
+      if (page == 1) {
+         setPage(1)
+      } else {
+         setPage(page - 1)
+      }
+
    }
 
    const handleRemoveToEdit = product => () => {

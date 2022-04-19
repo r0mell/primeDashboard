@@ -27,7 +27,7 @@ const ImagesLayout = ({ item }) => {
          }
       }
       if (position == 'center') {
-         top = "25%"
+         top = "29%"
          left = "45%"
       }
       if (position == 'left') {

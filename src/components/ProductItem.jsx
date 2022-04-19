@@ -21,7 +21,7 @@ const ProductItem = ({ product, handleAddToCart }) => {
         </div>
 
         <div className="product-grid-item-content">
-          <img src={product.images[1]} />
+          <img src={product.images[0]} />
           <h3 className="product-name">{product.title}</h3>
           <h4 className="product-description">@{product.createdBy}</h4>
           {/* <Rating ></Rating> */}
