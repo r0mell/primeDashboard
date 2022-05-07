@@ -8,7 +8,7 @@ import Carousel from '../containers/Carousel';
 
 import images from '../constants/imagesCarousel'
 
-let URLIMAGE = ''
+let URLIMAGE = 'https://i.imgur.com/c7l6MNB.png'
 
 //estas componente renderiza tanto las fotografias como el carrucel 
 const ImagesLayout = ({ item }) => {

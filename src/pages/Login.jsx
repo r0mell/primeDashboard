@@ -28,8 +28,6 @@ const Login = () => {
 
          toast.current.show({ severity: 'success', summary: 'Inicio Correcto', detail: 'Iniciando Sesión' });
 
-         //await getProfile()
-
          setTimeout(() => {
             navigate('/product/products')
          }, 2000)
@@ -37,13 +35,8 @@ const Login = () => {
 
       if (statusAux == 401) {
 
-         toast.current.show({ severity: 'success', summary: 'Error En Credenciales', detail: 'Error Iniciando Sesión' });
+         toast.current.show({ severity: 'warn', summary: 'Error En Credenciales', detail: 'Error Iniciando Sesión' });
       }
-
-      /* console.log('formulario enviado'); */
-
-      //toast.current.show({ severity: 'success', summary: 'Inicio Correcto', detail: 'Iniciando Sesión' });
-
    }
 
    return (
@@ -69,6 +62,7 @@ const Login = () => {
                      .email('El correo electrónico que has introducido es invalido')
                      .required('Correo electrónico requerido'),
                   userPassword: Yup.string()
+                     
                      .required('Contraseña requerida')
                })}
 
@@ -76,9 +70,9 @@ const Login = () => {
                   let errors = {}
 
                   //validation password
-                  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/.test(valores.userPassword)) {
+                  /* if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/.test(valores.userPassword)) {
                      errors.userPassword = 'Contraseña invalida al menos [A, a, *, 0-9]'
-                  }
+                  } */
                   return errors
                }}
 

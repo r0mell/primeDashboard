@@ -83,7 +83,6 @@ const AppState = (props) => {
             'loggedNoteAppUser', JSON.stringify(token.data)
          )
 
-         
 
          dispatch({
             type: 'GET_TOKEN',
@@ -93,8 +92,8 @@ const AppState = (props) => {
          return status = token.status
 
       } catch (error) {
-         console.log('Entra en el catch');
-         console.log(error.response);
+         //console.log('Entra en el catch');
+         //console.log(error.response);
          return status = error.response.status
       }
 
