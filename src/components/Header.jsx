@@ -11,9 +11,9 @@ const Header = (props) => {
 
    return (
       <div className="layout-topbar">
-         <Link to="/home" className="layout-topbar-logo">
+         <Link to="/product/products" className="layout-topbar-logo">
             <img src={logoUnick} alt="logo" />
-           {/*  <span>Unick</span> */}
+            {/*  <span>Unick</span> */}
          </Link>
 
          <button type="button" className="p-link  layout-menu-button layout-topbar-button" onClick={props.onToggleMenuClick}>

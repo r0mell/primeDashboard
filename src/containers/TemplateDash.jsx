@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Menu from '../components/Menu';
 import MenuItems from '../constants/consts';
 
-const TemplateDash = () => {
+const TemplateDash = ({ menu }) => {
    return (
 
       <>
@@ -12,7 +12,7 @@ const TemplateDash = () => {
             <Header />
             <div className='layout-sidebar'>
                <Menu
-                  model={MenuItems}
+                  model={menu}
                /* onMenuItemClick={onMenuItemClick}  */ />
             </div>
          </div>

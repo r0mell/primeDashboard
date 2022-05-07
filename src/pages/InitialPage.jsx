@@ -20,9 +20,7 @@ const InitialPage = () => {
                   <div className='p-md-5 p-col-12'>
                      <div className='initial-presentation'>
                         <h1>Bienvenido a Unick</h1>
-                        <p>Esta es una demostracion de lo que podemos presentar</p>
-                        {/* <ButtonLogin /> */}
-                        {/* <Login /> */}
+                        <h4>Descubre una nueva forma de vestir</h4>
                         <div className='initial-access'>
                            <Link to='/logup'><Button>Registrate</Button></Link>
                            <Link to='/login'><Button>Inicia Sesión</Button></Link>

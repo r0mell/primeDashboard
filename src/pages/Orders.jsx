@@ -1,12 +1,16 @@
-import { Button } from 'primereact/button';
 import React, { useContext } from 'react'
+import { Button } from 'primereact/button';
+
+import MenuItems from '../constants/consts';
+import MenuClients from '../constants/menuClients';
+
 import OrderItem from '../components/OrderItem';
 import TemplateDash from '../containers/TemplateDash';
 import AppContext from '../context/AppContext';
 
 const Orders = () => {
 
-   const { cart, removeToCart, postNewOrder } = useContext(AppContext);
+   const { cart, removeToCart, postNewOrder, user } = useContext(AppContext);
 
    const handleRemoveToCart = item => () => {
       removeToCart(item)
@@ -52,46 +56,56 @@ const Orders = () => {
 
    return (
 
-      <div className='layout-wrapper'>
+      <>
 
-         <TemplateDash />
+         {user
+            ? <div className='layout-wrapper'>
 
-         <div className="layout-main-container">
-            <div className="layout-main">
+               {
+                  user.isAdmin
+                     ? < TemplateDash menu={MenuItems} />
+                     : < TemplateDash menu={MenuClients} />
+               }
 
-               <div className="orders-card">
-                  <h2>Lista de productos</h2>
+               <div className="layout-main-container">
+                  <div className="layout-main">
 
-                  {
-                     cart.map((itemCart, index) => (
+                     <div className="orders-card">
+                        <h2>Lista de productos</h2>
 
-                        <OrderItem
-                           key={index}
-                           itemCart={itemCart}
-                           handleRemoveToCart={handleRemoveToCart}
-                        />
+                        {
+                           cart.map((itemCart, index) => (
 
-                     ))
-                  }
+                              <OrderItem
+                                 key={index}
+                                 itemCart={itemCart}
+                                 handleRemoveToCart={handleRemoveToCart}
+                              />
 
-                  <div className="orders-total">
-                     <h4> Productos: {cart.length}</h4>
-                     <h4>{`Total a pagar: $  ${reducePrice()}`} </h4>
-                     <Button
-                        type="submit"
-                        label='Comprar'
-                        className="p-button-success p-button-sm"
-                        icon="pi pi-shopping-bag"
-                        onClick={getOrder}
+                           ))
+                        }
 
-                     />
+                        <div className="orders-total">
+                           <h4> Productos: {cart.length}</h4>
+                           <h4>{`Total a pagar: $  ${reducePrice()}`} </h4>
+                           <Button
+                              type="submit"
+                              label='Comprar'
+                              className="p-button-success p-button-sm"
+                              icon="pi pi-shopping-bag"
+                              onClick={getOrder}
+
+                           />
+                        </div>
+
+                     </div>
                   </div>
-
                </div>
             </div>
-         </div>
-      </div>
+            : <div>Cargando informacion</div>
+         }
 
+      </>
    )
 }
 

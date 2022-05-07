@@ -1,6 +1,6 @@
 .login-box {
-	width: 350px;
-	height: 500px;
+	width: 23vw;
+	height: 65vh;
 	background-color: #fff;
 	color: var(--text-color);
 	top: 50%;
@@ -15,8 +15,8 @@
 }
 
 .logup-box {
-	width: 350px;
-	height: 550px;
+	width: 23vw;
+	height: 65vh;
 }
 
 .login-box h1 {
@@ -35,7 +35,7 @@
 
 .login-box input {
 	width: 100%;
-	margin-bottom: 20px;
+	margin-bottom: 0.5rem;
 	font-family: var(--font-family);
 	color: var(--text-color);
 }

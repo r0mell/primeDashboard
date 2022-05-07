@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 import { Button } from 'primereact/button'
 import { Link, useNavigate } from 'react-router-dom'
@@ -32,30 +33,29 @@ function CreateAccount() {
 
                }}
 
+               validationSchema={Yup.object({
+
+                  email: Yup.string()
+                     .email('El correo electrónico que has introducido es invalido')
+                     .required('Correo electrónico requerido'),
+                  nickName: Yup.string()
+                     .min(4, 'Debería tener como mínimo 4 caracteres')
+                     .max(10, 'Debería tener como máximo 10 caracteres')
+                     .required('Nick requerido'),
+                  passwordHash: Yup.string()
+                     .min(8, 'La contraseña debe tener mínimo 4 caracteres')
+                     .max(15, 'La contraseña debe tener máximo 15 caracteres')
+                     .required('Contraseña requerida')
+
+               })}
+
                validate={(valores) => {
                   let errors = {}
 
-                  //validacion correo
-                  if (!valores.email) {
-                     errors.email = 'Correo requerido'
-                  } else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.email)) {
-                     errors.email = 'Correo sin formato'
-                  }
-
-                  //validacion nickName
-                  if (!valores.nickName) {
-                     errors.nickName = 'Nick requerido'
-                  } /* else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nickName)) {
-                     errors.nickName = 'El nick debe ser unico'
-                  } */
-
                   //validacion pasword
-                  if (!valores.passwordHash) {
-                     errors.passwordHash = 'Contraseña requerida'
-                  } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/.test(valores.passwordHash)) {
+                  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/.test(valores.passwordHash)) {
                      errors.passwordHash = 'Contraseña invalida/*  */ al menos A a * 0-9'
                   }
-
 
                   return errors
                }}

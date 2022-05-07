@@ -69,30 +69,45 @@ const AppState = (props) => {
 
    const getToken = async (credentials) => {
 
-      let token
+      let status
 
       const URI = 'http://localhost:3001/api/v1/login'
 
       try {
-         token = await axios.post(URI, credentials)
-         console.log(token.data);
+
+         let token = await axios.post(URI, credentials)
+
+         //console.log(token.data);
 
          window.localStorage.setItem(
             'loggedNoteAppUser', JSON.stringify(token.data)
          )
 
+         
+
+         dispatch({
+            type: 'GET_TOKEN',
+            payload: token.data
+         })
+
+         return status = token.status
+
       } catch (error) {
-         console.log(error);
+         console.log('Entra en el catch');
+         console.log(error.response);
+         return status = error.response.status
       }
 
-      dispatch({
+      /* dispatch({
          type: 'GET_TOKEN',
          payload: token.data
-      })
+      }) */
 
-      return token.data
-
+      //return token.data
    }
+
+
+
 
    const addToEdit = async (productToEdit) => {
 
@@ -258,12 +273,6 @@ const AppState = (props) => {
 
    }
 
-   const getOrders = () => {
-
-      /* Aqui se tiene que llamar a las ordenes que ha realizado cada cliente  */
-
-   }
-
    const addToCart = (item) => {
 
 
@@ -330,12 +339,11 @@ const AppState = (props) => {
 
       let usuario
       try {
-         //console.log(state.userToken.token);
          usuario = await axios.get('http://localhost:3001/api/v1/users/6229357a16f575c47a97b8ef', config)
 
       } catch (error) {
 
-         //console.log('entra a este error');
+         console.log('entra a este error');
          //console.log(error);
       }
 
@@ -382,7 +390,6 @@ const AppState = (props) => {
          type: 'REMOVE_USER'
       })
    }
-
 
    const putOrderState = async (newOrderState, idOrder) => {
 
@@ -447,8 +454,6 @@ const AppState = (props) => {
 
    }
 
-
-
    const getUserOrders = async () => {
 
       const config = {
@@ -473,8 +478,6 @@ const AppState = (props) => {
 
       return userOrders
    }
-
-
 
 
    return (

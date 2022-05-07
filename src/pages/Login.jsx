@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { Toast } from 'primereact/toast';
@@ -9,34 +10,39 @@ import AppContext from '../context/AppContext';
 
 const Login = () => {
 
+   const { getToken, getProfile } = useContext(AppContext)
+
    const navigate = useNavigate()
 
-   const { getToken } = useContext(AppContext)
-   const [validate, setValidate] = useState(false)
    const toast = useRef()
 
-   const sunmitFuction = async (valores, resetForm) => {
+   const submitFunction = async (valores, resetForm) => {
 
-      let tokenAux = await getToken(valores)
+      let statusAux = await getToken(valores)
 
-      console.log(tokenAux);
-      console.log('formulario enviado');
+      //console.log(statusAux);
 
-      toast.current.show({ severity: 'success', summary: 'Inicio Correcto', detail: 'Iniciando Sesión' });
-
-      setValidate(true)
       resetForm()
 
-      setTimeout(() => {
-         setValidate(false)
-         console.log('procesando informacion ');
+      if (statusAux == 200) {
 
-      }, 2000);
+         toast.current.show({ severity: 'success', summary: 'Inicio Correcto', detail: 'Iniciando Sesión' });
 
+         //await getProfile()
 
-      setTimeout(() => {
-         navigate('/product/products')
-      }, 2000)
+         setTimeout(() => {
+            navigate('/product/products')
+         }, 2000)
+      }
+
+      if (statusAux == 401) {
+
+         toast.current.show({ severity: 'success', summary: 'Error En Credenciales', detail: 'Error Iniciando Sesión' });
+      }
+
+      /* console.log('formulario enviado'); */
+
+      //toast.current.show({ severity: 'success', summary: 'Inicio Correcto', detail: 'Iniciando Sesión' });
 
    }
 
@@ -58,30 +64,26 @@ const Login = () => {
 
                }}
 
+               validationSchema={Yup.object({
+                  email: Yup.string()
+                     .email('El correo electrónico que has introducido es invalido')
+                     .required('Correo electrónico requerido'),
+                  userPassword: Yup.string()
+                     .required('Contraseña requerida')
+               })}
+
                validate={(valores) => {
                   let errors = {}
 
-                  //validacion correo
-                  if (!valores.email) {
-                     errors.email = 'Correo requerido'
-                  } else if (!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.email)) {
-                     errors.email = 'Correo sin formato'
-                  }
-
-                  //validacion pasword
-                  if (!valores.userPassword) {
-                     errors.userPassword = 'Contraseña requerida'
-                  } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/.test(valores.userPassword)) {
+                  //validation password
+                  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/.test(valores.userPassword)) {
                      errors.userPassword = 'Contraseña invalida al menos [A, a, *, 0-9]'
                   }
-
-
                   return errors
                }}
 
                onSubmit={async (valores, { resetForm }) => {
-                  sunmitFuction(valores, resetForm)
-
+                  submitFunction(valores, resetForm)
                }}
 
 

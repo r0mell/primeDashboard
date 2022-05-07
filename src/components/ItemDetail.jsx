@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import * as Yup from 'yup';
 
 import { Button } from 'primereact/button';
 import AppContext from '../context/AppContext';
@@ -21,7 +22,7 @@ const ImagesLayout = ({ item }) => {
       let left
       let positionElemet
 
-      if (position == null) {
+      if (position == '') {
          return positionElemet = {
             display: "block"
          }
@@ -100,7 +101,7 @@ const ImagesLayout = ({ item }) => {
 
 
 //item main para renderizado
-const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
+const ItemDetail = ({ itemDetail }) => {
 
    const { addMyProducts } = useContext(AppContext);
 
@@ -142,7 +143,7 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
                   color: '',
                   size: '',
                   neckType: '',
-                  position: null,
+                  position: '',
                   stampingType: ''
 
 
@@ -150,19 +151,52 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
                validate={(valores) => {
 
+                  let errors = {}
 
-
+                  if (!/^[a-zA-Z0-9]{0,16}$/.test(valores.proyectName)) {
+                     errors.proyectName = 'El nombre solo puede contener letras'
+                  }
+                  return errors
                }}
 
+               validationSchema={Yup.object({
+
+                  proyectName: Yup.string()
+                     .min(3, 'Minimo 3 caracteres')
+                     .max(15, 'Maximo 15 caracteres')
+                     .required('Nombre de proyecto requerido'),
+                  color: Yup.string()
+                     .oneOf(
+                        ['white', 'black', 'red'],
+                        'Tipo de talla invalido'
+                     )
+                     .required('Color requerido'),
+                  size: Yup.string()
+                     .oneOf(
+                        ['XS', 'S', 'XM', 'M', 'XL', 'L'],
+                        'Tipo de talla invalido'
+                     )
+                     .required('Talla requerida'),
+                  neckType: Yup.string()
+                     .oneOf(
+                        ['round', 'tipeV'],
+                        'Tipo de cuello invalido'
+                     )
+                     .required('Tipo de cuello requerido'),
+                  position: Yup.string()
+                     .required('Posición logo requerido'),
+
+                  stampingType: Yup.string()
+                     .required('Tipo de estampado requerido'),
+
+               })}
+
                onSubmit={(valores, { resetForm }) => {
-
                   createMyProduct(valores, resetForm)
-
-
                }}
 
             >
-               {({ errors, values }) => (
+               {({ errors, values, handleReset }) => (
 
                   <Form>
 
@@ -170,7 +204,6 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
 
                         <ImagesLayout
                            item={itemDetail}
-
                         />
 
                      </div>
@@ -184,8 +217,12 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
                               type="text"
                               id='proyectName'
                               name='proyectName'
+                              minlength="3" maxlength="15" size="15"
                               placeholder='Ej: Proyecto1'
                            />
+                           <ErrorMessage name='proyectName' component={() => (
+                              <div className='account-error'>{errors.proyectName}</div>
+                           )} />
 
                            <label htmlFor="color"> <h4>Escoje el color</h4></label>
                            <Field name="color" as='select'>
@@ -193,7 +230,9 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
                               <option value="black">Negro</option>
                               <option value="red">Rojo</option>
                            </Field>
-
+                           <ErrorMessage name='color' component={() => (
+                              <div className='account-error'>{errors.color}</div>
+                           )} />
 
                            <label htmlFor="size" > <h4>Talla</h4></label>
                            <Field name="size" as='select'>
@@ -204,17 +243,22 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
                               <option value="XL">XL</option>
                               <option value="L">L</option>
                            </Field>
+                           <ErrorMessage name='size' component={() => (
+                              <div className='account-error'>{errors.size}</div>
+                           )} />
 
                            <label htmlFor="neckType" > <h4>Tipo de cuello</h4></label>
                            <Field name="neckType" as='select'>
                               <option value="round">Redondo</option>
                               <option value="tipeV">Tipo V</option>
                            </Field>
+                           <ErrorMessage name='neckType' component={() => (
+                              <div className='account-error'>{errors.neckType}</div>
+                           )} />
 
                         </div>
 
                         <div className='itemDetail-form-'>
-                           {/*     <img src={itemDetail.images[1]} alt={itemDetail.title} /> */}
 
                            <h4>Posición del logo</h4>
 
@@ -227,6 +271,9 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
                            <label >
                               <Field type="radio" name='position' value='right' /> Derecho
                            </label>
+                           <ErrorMessage name='position' component={() => (
+                              <div className='account-error'>{errors.position}</div>
+                           )} />
 
 
                            <h4>Tipo de estampado</h4>
@@ -237,19 +284,18 @@ const ItemDetail = ({ itemDetail, handleCanceLoadItem }) => {
                            <label >
                               <Field type="radio" name='stampingType' value='estampado' /> Estampado
                            </label>
+                           <ErrorMessage name='stampingType' component={() => (
+                              <div className='account-error'>{errors.stampingType}</div>
+                           )} />
 
                            <h4>Precio</h4>
-                           {/* <p>$ {itemDetail.price + 5}</p> */}
-                           <p>$ {calculatePrice(values.stampingType) || itemDetail.price}</p>
+                           <h3>$ {calculatePrice(values.stampingType) || itemDetail.price}</h3>
 
                         </div>
-
                      </div>
 
-
-
                      <div className='itemDetail-footer'>
-                        <Button label="Cancelar" icon="pi pi-times" className="p-button-text p-button-sm" onClick={handleCanceLoadItem} />
+                        <Button label="Cancelar" icon="pi pi-times" className="p-button-text p-button-sm" onClick={handleReset} />
                         <Button type='submit' label="Guardar" icon="pi pi-check" className="p-button-text p-button-sm" />
 
                      </div>

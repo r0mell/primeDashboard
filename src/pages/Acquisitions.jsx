@@ -1,12 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import MenuItems from '../constants/consts';
+import MenuClients from '../constants/menuClients';
+
 import MaterialTable from '@material-table/core'
 import axios from 'axios'
 import TemplateDash from '../containers/TemplateDash'
 import { Toast } from 'primereact/toast';
+import AppContext from '../context/AppContext';
 
 
 const Acquisitions = () => {
+
+   const { user } = useContext(AppContext);
 
    const colums = [
       {
@@ -53,7 +60,6 @@ const Acquisitions = () => {
 
    }
 
-
    useEffect(async () => {
 
       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -91,57 +97,62 @@ const Acquisitions = () => {
 
 
    return (
-
-      <div className='layout-wrapper'>
-         <TemplateDash />
-         <div className="layout-main-container">
-            <Toast ref={toast} />
-            <div className="layout-main">
-
+      <>
+         {user
+            ? <div className='layout-wrapper'>
                {
-                  orderss
-                     ? <MaterialTable
-                        columns={colums}
-                        data={orderss}
-
-                        actions={[
-                           {
-                              icon: () => <i className="pi pi-file-pdf"></i>,
-                              tooltip: 'generate report',
-                              onClick: (event, rowData) => {
-
-                                 generateReport(rowData)
-
-                              }
-                           }
-                        ]}
-
-                        options={{
-                           exportMenu: [{
-                              label: 'Export PDF',
-                              exportFunc: (cols, datas) => ExportPdf(cols, datas, 'OrdersAdministrator')
-                           }, {
-                              label: 'Export CSV',
-                              exportFunc: (cols, datas) => ExportCsv(cols, datas, 'OrdersAdministrator')
-                           }],
-                           pageSizeOptions: [10, 15], pageSize: 10, paginationType: "stepped", showFirstLastPageButtons: false,
-                           actionsColumnIndex: -1
-
-                        }}
-                        title="Tus Compras"
-                     />
-
-                     : <h2>rending</h2>
+                  user.isAdmin
+                     ? < TemplateDash menu={MenuItems} />
+                     : < TemplateDash menu={MenuClients} />
                }
+               <div className="layout-main-container">
+                  <Toast ref={toast} />
+                  <div className="layout-main">
 
+                     {
+                        orderss
+                           ? <MaterialTable
+                              columns={colums}
+                              data={orderss}
 
+                              actions={[
+                                 {
+                                    icon: () => <i className="pi pi-file-pdf"></i>,
+                                    tooltip: 'generate report',
+                                    onClick: (event, rowData) => {
 
+                                       generateReport(rowData)
 
+                                    }
+                                 }
+                              ]}
 
+                              options={{
+                                 exportMenu: [{
+                                    label: 'Export PDF',
+                                    exportFunc: (cols, datas) => ExportPdf(cols, datas, 'OrdersAdministrator')
+                                 }, {
+                                    label: 'Export CSV',
+                                    exportFunc: (cols, datas) => ExportCsv(cols, datas, 'OrdersAdministrator')
+                                 }],
+                                 pageSizeOptions: [10, 15], pageSize: 10, paginationType: "stepped", showFirstLastPageButtons: false,
+                                 actionsColumnIndex: -1
 
+                              }}
+                              title="Tus Compras"
+                           />
+
+                           : <div>Cargando informacion</div>
+                     }
+
+                  </div>
+               </div>
             </div>
-         </div>
-      </div>
+            : <div>Cargando informacion</div>
+         }
+
+
+      </>
    )
 }
 

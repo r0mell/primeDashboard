@@ -24,7 +24,9 @@ const useGetAllProducts = () => {
       },
       {
          title: 'Precio',
-         field: 'price'
+         field: 'price',
+         type: "currency",
+         align: "left",
       },
       {
          title: 'Creado por',

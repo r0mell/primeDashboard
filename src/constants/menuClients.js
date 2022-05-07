@@ -1,4 +1,4 @@
-const MENU = [
+const MENUCLIENT = [
    {
       label: "Productos",
       icon: "pi pi-fw pi-file",
@@ -39,29 +39,6 @@ const MENU = [
       ],
    },
    {
-      label: "Administración",
-      icon: "pi pi-fw pi-calendar",
-      items: [
-         {
-            label: "Productos",
-            icon: "pi pi-fw pi-shopping-bag",
-            to: '/admin/products',
-
-         },
-         {
-            label: "Clientes",
-            icon: "pi pi-fw pi-id-card",
-            to: '/admin/clients',
-         },
-         {
-            label: "Ordenes",
-            icon: "pi pi-fw pi-wallet",
-            to: '/admin/checkout',
-         },
-
-      ],
-   },
-   {
       label: "Usuario",
       icon: "pi pi-fw pi-user",
       items: [
@@ -79,5 +56,5 @@ const MENU = [
    }
 ];
 
-export default MENU;
+export default MENUCLIENT;
 
