@@ -4,9 +4,43 @@ import paypal from '../assets/img/PayPal.png'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import AppContext from '../context/AppContext'
-
+import logoUnick from '../assets/icons/Unick_logo.png'
 
 const RenderProductList = ({ reportOrder }) => {
+
+   const positionLogo = (position) => {
+
+      let top
+      let left
+      let positionElemet
+
+      if (position == null) {
+         return positionElemet = {
+            display: "block"
+         }
+      }
+      if (position == 'center') {
+         top = "39%"
+         left = "45%"
+      }
+      if (position == 'left') {
+         top = "39%";
+         left = "36.5%";
+      }
+      if (position == 'right') {
+         top = "39%"
+         left = "40.5%"
+      }
+
+      positionElemet = {
+         width: "2%",
+         height: "auto",
+         top: `${top}`,
+         left: `${left}`
+      }
+
+      return positionElemet
+   }
 
    return (
       <>
@@ -14,7 +48,7 @@ const RenderProductList = ({ reportOrder }) => {
 
             <div className='reportorder-header'>
 
-               <img src={paypal} alt="logo-paypal" />
+               <img src={logoUnick} alt="logo-paypal" />
                <h1>Orden de Compra </h1>
                <h2>{`Nº ${reportOrder.id}`}</h2>
 
@@ -48,21 +82,26 @@ const RenderProductList = ({ reportOrder }) => {
             {
                reportOrder.productList.map((item, index) => (
 
-                  <div className='reportorder-body'>
+                  <div className='reportorder-body' key={index}>
+                     
 
-                     <h3>{`Items: ${index}`}</h3>
+                     <h3>{`Items: ${index+1}`}</h3>
 
                      <div className='reportorder-body-description'>
 
                         <div className='reportorder-body-description-first'>
                            <h4>{`Nombre Producto: ${item.proyectName}`}</h4>
-                           <p>{`Color: ${item.color}`}</p>
                            <p>{`Talla: ${item.size}`}</p>
+                           <p>{`Color: ${item.color}`}</p>
+                           <p>{`Posión Logo: ${item.position}`}</p>
+                           <p>{`Tipo de Estampado: ${item.stampingType}`}</p>
+                           <p>{`Tipo de Cuello: ${item.neckType}`}</p>
+                           <p>{`Precio Unitario: $${item.updatePrice}`}</p>
                         </div>
                         <div className='reportorder-body-description-second'>
                            <h4>Imagenes del Producto</h4>
-                           <img src={item.imagesProduct.template} alt="logo-paypal" />
-                           <img src={item.imagesProduct.logo} alt="logo-paypal" />
+                           <img className='reportorder-body-description-template' src={item.imagesProduct.template} alt="logo-paypal" />
+                           <img className='reportorder-body-description-logo' src={item.imagesProduct.logo} style={positionLogo(item.position)} alt="logo-paypal" />
                         </div>
                      </div>
 

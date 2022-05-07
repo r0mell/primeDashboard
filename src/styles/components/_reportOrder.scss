@@ -18,7 +18,8 @@
    position: relative;
    top: 10%;
    img {
-      width: 10%;
+      width: auto;
+      padding: 2rem;
    }
 }
 .reportorder-information {
@@ -43,12 +44,33 @@
    position: relative;
    top: 10%;
    gap: 2rem;
+   align-items: flex-start;
 }
 
+.reportorder-body-description-first{
+   width: 30%;
+
+}
 .reportorder-body-description-second {
-   img {
-      width: 10%;
-   }
+   width: 30%;
+
+}
+
+
+.reportorder-body-description-template{
+
+   width: 50%;
+}
+.reportorder-body-description-logo{
+
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   left: 0px;
+   bottom: 0px;
+   font-size: 1rem;
+   color: red;
+   height: 5%;
 }
 
 .reportorder-footer {

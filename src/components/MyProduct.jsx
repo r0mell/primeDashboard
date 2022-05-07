@@ -2,6 +2,7 @@ import React from 'react';
 
 const MyProduct = ({ myProduct, handleAddToCart }) => {
 
+   /*Posiciona el logo en el sitio asignado por el usuario */
    const positionLogo = () => {
 
       let top
