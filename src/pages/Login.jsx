@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useRef } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -20,15 +20,11 @@ const Login = () => {
 
       let statusAux = await getToken(valores)
 
-      //console.log(statusAux);
-
       resetForm()
 
       if (statusAux == 200) {
 
          toast.current.show({ severity: 'success', summary: 'Inicio Correcto', detail: 'Iniciando Sesión' });
-
-         //await getProfile()
 
          setTimeout(() => {
             navigate('/product/products')
@@ -37,12 +33,8 @@ const Login = () => {
 
       if (statusAux == 401) {
 
-         toast.current.show({ severity: 'success', summary: 'Error En Credenciales', detail: 'Error Iniciando Sesión' });
+         toast.current.show({ severity: 'warn', summary: 'Error En Credenciales', detail: 'Error Iniciando Sesión' });
       }
-
-      /* console.log('formulario enviado'); */
-
-      //toast.current.show({ severity: 'success', summary: 'Inicio Correcto', detail: 'Iniciando Sesión' });
 
    }
 

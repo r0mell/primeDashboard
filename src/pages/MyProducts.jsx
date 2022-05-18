@@ -1,4 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+
+import { Toast } from 'primereact/toast';
 
 import MenuItems from '../constants/consts';
 import MenuClients from '../constants/menuClients';
@@ -12,6 +14,7 @@ function MyProducts() {
 
    const { addToCart, getToEdits, user } = useContext(AppContext);
    const [myProd, setmyProd] = useState(null)
+   const toast = useRef()
 
    useEffect(async () => {
 
@@ -22,6 +25,9 @@ function MyProducts() {
 
 
    const handleAddToCart = producto => () => {
+
+      toast.current.show({ severity: 'info', summary: 'Producto Agregado', detail: 'Producto añadido al carrito' });
+
       addToCart(producto);
    }
 
@@ -29,6 +35,8 @@ function MyProducts() {
    return (
 
       <>
+
+         <Toast ref={toast} />
 
          {user
             ? <div className='layout-wrapper'>

@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
+
 
 import Header from '../components/Header';
 import Menu from '../components/Menu';
 import ProductList from '../containers/ProductList';
+
 
 import MenuItems from '../constants/consts';
 import MenuClients from '../constants/menuClients';
@@ -14,7 +16,6 @@ import AppContext from '../context/AppContext';
 const Home = () => {
 
    const { getProfile, user } = useContext(AppContext)
-   //const [user, setUser] = useState(null)
 
 
    useEffect(async () => {
@@ -35,6 +36,7 @@ const Home = () => {
             user
                ? <div className='layout-wrapper' >
                   < Header />
+
                   <div className='layout-sidebar'>
 
                      {

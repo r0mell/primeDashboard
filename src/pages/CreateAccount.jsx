@@ -1,28 +1,29 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-import { Button } from 'primereact/button'
-import { Link, useNavigate } from 'react-router-dom'
+import { Toast } from 'primereact/toast';
+import { Link, useNavigate } from 'react-router-dom';
 
-import HeaderMain from '../components/HeaderMain'
+import HeaderMain from '../components/HeaderMain';
 import AppContext from '../context/AppContext';
 
 function CreateAccount() {
 
-
    const { logupUser } = useContext(AppContext)
-   const [validate, setValidate] = useState(false)
    const navigate = useNavigate()
+
+   const toast = useRef()
 
 
    return (
       <>
          <HeaderMain />
 
+         <Toast ref={toast} />
+
          <div className="login-box , logup-box">
             <h1>Registrate</h1>
-
 
             <Formik
 
@@ -62,22 +63,15 @@ function CreateAccount() {
 
                onSubmit={(valores, { resetForm }) => {
 
+                  toast.current.show({ severity: 'success', summary: 'Cuenta Creada', detail: 'Su cuenta ha sido creada exitosamente' });
+
                   logupUser(valores)
 
-                  console.log(valores);
-                  console.log('formulario enviado');
-
-                  setValidate(true)
                   resetForm()
 
                   setTimeout(() => {
-                     setValidate(false)
-                     console.log('procesando informacion ');
-                  }, 2000);
-
-                  setTimeout(() => {
                      navigate('/login')
-                  }, 3000)
+                  }, 2000)
 
                }}
 

@@ -51,7 +51,7 @@ const Acquisitions = () => {
 
    const generateReport = (data) => {
 
-      toast.current.show({ severity: 'info', summary: 'Generando Orden', detail: 'El detalle de la orden esta siendo generada' });
+      toast.current.show({ severity: 'info', summary: 'Generando Orden', detail: 'El detalle de la orden está siendo generada' });
 
       console.log(data.id);
       setTimeout(() => {
@@ -142,13 +142,13 @@ const Acquisitions = () => {
                               title="Tus Compras"
                            />
 
-                           : <div>Cargando informacion</div>
+                           : <div>Cargando información</div>
                      }
 
                   </div>
                </div>
             </div>
-            : <div>Cargando informacion</div>
+            : <div>Cargando información</div>
          }
 
 

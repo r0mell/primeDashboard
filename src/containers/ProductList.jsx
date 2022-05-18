@@ -1,19 +1,25 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useRef } from 'react';
+
+import { Toast } from 'primereact/toast';
+
 import ProductItem from '../components/ProductItem';
 import useGetProducts from '../hooks/useGetProducts';
 import AppContext from '../context/AppContext';
-
 
 
 const ProductList = () => {
 
   const { products, addToEdit } = useContext(AppContext);
   const [page, setPage] = useState(1);
+  const toast = useRef()
 
   useGetProducts(page)
 
 
   const handleAddToCart = product => () => {
+
+    toast.current.show({ severity: 'success', summary: 'Producto Agregado', detail: 'Producto listo para edición' });
+
     addToEdit(product)
   }
 
@@ -35,6 +41,8 @@ const ProductList = () => {
   return (
     <>
       <div className="p-grid">
+
+        <Toast ref={toast} />
 
         {products.map((product) => (
           <ProductItem

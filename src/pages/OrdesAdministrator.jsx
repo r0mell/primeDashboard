@@ -23,7 +23,7 @@ const OrdesAdministrator = () => {
 
    const generateReport = (data) => {
 
-      toast.current.show({ severity: 'info', summary: 'Generando Orden', detail: 'El detalle de la orden esta siendo generada' });
+      toast.current.show({ severity: 'info', summary: 'Generando Orden', detail: 'El detalle de la orden está siendo generada' });
 
       setTimeout(() => {
          navigate(`/orders/reports/${data.id}`)

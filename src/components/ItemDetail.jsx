@@ -1,6 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
 import * as Yup from 'yup';
+
+import { Toast } from 'primereact/toast';
+
 
 import { Button } from 'primereact/button';
 import AppContext from '../context/AppContext';
@@ -104,7 +107,7 @@ const ImagesLayout = ({ item }) => {
 const ItemDetail = ({ itemDetail }) => {
 
    const { addMyProducts } = useContext(AppContext);
-
+   const toast = useRef()
 
    const calculatePrice = (stampingType) => {
 
@@ -128,6 +131,8 @@ const ItemDetail = ({ itemDetail }) => {
 
    return (
       <div className='itemDetail-container'>
+
+         <Toast ref={toast} />
 
          <div className='itemDetail-header'>
             <h3>Detalles del producto</h3>
@@ -192,6 +197,7 @@ const ItemDetail = ({ itemDetail }) => {
                })}
 
                onSubmit={(valores, { resetForm }) => {
+                  toast.current.show({ severity: 'success', summary: 'Producto Creado', detail: 'Su producto se añadió correctamente' });
                   createMyProduct(valores, resetForm)
                }}
 
@@ -217,7 +223,7 @@ const ItemDetail = ({ itemDetail }) => {
                               type="text"
                               id='proyectName'
                               name='proyectName'
-                              minlength="3" maxlength="15" size="15"
+                              minLength="3" maxLength="15" size="15"
                               placeholder='Ej: Proyecto1'
                            />
                            <ErrorMessage name='proyectName' component={() => (
@@ -295,7 +301,19 @@ const ItemDetail = ({ itemDetail }) => {
                      </div>
 
                      <div className='itemDetail-footer'>
-                        <Button label="Cancelar" icon="pi pi-times" className="p-button-text p-button-sm" onClick={handleReset} />
+
+                        <Button label="Cancelar"
+                           icon="pi pi-times"
+                           className="p-button-text p-button-sm"
+                           onClick={
+
+                              () => {
+
+                                 handleReset()
+                                 toast.current.show({ severity: 'info', summary: 'Campos Borrados', detail: '' })
+
+                              }} />
+
                         <Button type='submit' label="Guardar" icon="pi pi-check" className="p-button-text p-button-sm" />
 
                      </div>
