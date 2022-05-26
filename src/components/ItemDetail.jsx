@@ -310,7 +310,7 @@ const ItemDetail = ({ itemDetail }) => {
                               () => {
 
                                  handleReset()
-                                 toast.current.show({ severity: 'info', summary: 'Campos Borrados', detail: '' })
+                                 toast.current.show({ severity: 'info', summary: 'Edición Cancelada', detail: 'Campos Borrados' })
 
                               }} />
 
