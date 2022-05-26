@@ -90,7 +90,7 @@ const Orders = () => {
                            <h4>{`Total a pagar: $  ${reducePrice()}`} </h4>
                            <Button
                               type="submit"
-                              label='Comprar'
+                              label='Pagar Productos'
                               className="p-button-success p-button-sm"
                               icon="pi pi-shopping-bag"
                               onClick={getOrder}
