@@ -44,7 +44,7 @@ const Logout = () => {
                         <h1>Cerrar Sesión</h1>
 
                         <div className='logout-container' >
-                           <h4> ¿Estas seguro de que quieres salir? </h4>
+                           <h4> ¿Estas seguro de que deseas cerrar tu sesión? </h4>
                            <ButtonLogout />
                         </div>
 

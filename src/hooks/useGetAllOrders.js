@@ -12,7 +12,7 @@ const useGetAllOrders = () => {
          editable: false
       },
       {
-         title: 'Cliente',
+         title: 'Cliente Email',
          field: 'client',
          editable: false
       },

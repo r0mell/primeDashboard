@@ -8,7 +8,8 @@ const useGetAllProducts = () => {
    const columnas = [
       {
          title: 'UID',
-         field: 'UID'
+         field: 'UID',
+         editable: false
       },
       {
          title: 'Nombre',
@@ -20,7 +21,8 @@ const useGetAllProducts = () => {
       },
       {
          title: 'Cantidad de colores',
-         field: 'amountColors'
+         field: 'amountColors',
+         editable: false
       },
       {
          title: 'Precio',
@@ -30,7 +32,8 @@ const useGetAllProducts = () => {
       },
       {
          title: 'Creado por',
-         field: 'createdFor'
+         field: 'createdFor',
+         editable: false
       }
    ]
 

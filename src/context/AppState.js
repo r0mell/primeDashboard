@@ -11,8 +11,6 @@ import generatorId from '../utils/uidGenerator'
 const AppState = (props) => {
 
 
-
-
    const initialState = {
 
       user: null,
@@ -421,11 +419,6 @@ const AppState = (props) => {
 
    const putAdminPermits = async (isAdmin, id) => {
 
-      console.log(isAdmin);
-      console.log(id);
-
-
-
       const config = {
          headers: {
             Authorization: `Bearer ${state.userToken.token}`
@@ -436,10 +429,6 @@ const AppState = (props) => {
          "isAdmin": isAdmin,
          "id": id
       }
-
-      console.log(adminPermits);
-
-
 
       const URI = `http://localhost:3001/api/v1/users/adminPermits`
 
@@ -453,6 +442,7 @@ const AppState = (props) => {
 
    }
 
+
    const getUserOrders = async () => {
 
       const config = {
@@ -462,8 +452,6 @@ const AppState = (props) => {
       }
 
       let userOrders
-
-
 
       const URI = `http://localhost:3001/api/v1/order/clients/ordersBy`
 
@@ -478,6 +466,38 @@ const AppState = (props) => {
       return userOrders
    }
 
+   const putEditProducts = async (title, category, price, id) => {
+
+
+      console.log(title + category + price + id);
+
+
+      const config = {
+         headers: {
+            Authorization: `Bearer ${state.userToken.token}`
+         }
+      }
+
+      const updateInformation = {
+         "id": id,
+         "title": title,
+         "category": category,
+         "price": price
+      }
+
+
+      const URI = `http://localhost:3001/api/v1/products/updateData`
+
+      try {
+         const userPermits = await axios.put(URI, updateInformation, config)
+         //console.log(token.data);
+
+      } catch (error) {
+         console.log(error);
+      }
+
+
+   }
 
    return (
       <AppContext.Provider value={{
@@ -488,7 +508,6 @@ const AppState = (props) => {
          toEdit: state.toEdit,
          myProducts: state.myProducts,
          cart: state.cart,
-         //getUser,
          getProfile,
          getProducts,
          getToken,
@@ -504,7 +523,8 @@ const AppState = (props) => {
          postNewOrder,
          putOrderState,
          putAdminPermits,
-         getUserOrders
+         getUserOrders,
+         putEditProducts
 
       }}>
 

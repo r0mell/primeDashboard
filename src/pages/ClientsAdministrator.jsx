@@ -16,10 +16,9 @@ const ClientsAdministrator = () => {
 
    const updatePermits = (newClient) => {
 
-      //un Patch para actualizar los permisos de administrador
-
+      //peticion Patch para actualizar los permisos de administrador
       const { isAdmin, id } = newClient
-      console.log(newClient);
+      //console.log(newClient);
       putAdminPermits(isAdmin, id)
    }
 
@@ -59,7 +58,8 @@ const ClientsAdministrator = () => {
                               label: 'Export CSV',
                               exportFunc: (cols, datas) => ExportCsv(cols, datas, 'ClientsAdministrator')
                            }],
-                           pageSizeOptions: [10, 15], pageSize: 10, paginationType: "stepped", showFirstLastPageButtons: false,
+                           pageSizeOptions: [10, 15], pageSize: 10, paginationType: "stepped", 
+                           showFirstLastPageButtons: false,
                            actionsColumnIndex: -1
 
                         }}
